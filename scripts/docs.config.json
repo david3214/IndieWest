@@ -1,0 +1,21 @@
+{
+  "products": [
+    {
+      "slug": "card-hand-toolkit",
+      "name": "Card Hand Toolkit",
+      "source": "../../My games/Card Game Template/Assets/CardHandToolkit/Documentation",
+      "snapshot": "docs-src/card-hand-toolkit",
+      "output": "tools/card-hand-toolkit/docs",
+      "productPage": "tools/card-hand-toolkit/index.html",
+      "versionFrom": "CHANGELOG.md",
+      "pages": [
+        { "file": "README.md", "title": "Overview" },
+        { "file": "QuickStart.md", "title": "Quick Start" },
+        { "file": "API.md", "title": "API Reference" },
+        { "file": "FAQ.md", "title": "FAQ" },
+        { "file": "CHANGELOG.md", "title": "Changelog" },
+        { "file": "LICENSE.md", "title": "License" }
+      ]
+    }
+  ]
+}

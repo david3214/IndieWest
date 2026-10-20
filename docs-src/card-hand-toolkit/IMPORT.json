@@ -1,0 +1,31 @@
+{
+  "source": "../../My games/Card Game Template/Assets/CardHandToolkit/Documentation",
+  "importedAt": "2026-10-20T20:11:44.239Z",
+  "files": {
+    "API.md": "17e2cf42107cf51f86f9635b35130d28f1b95c5841610ed7f012fea1c18b0816",
+    "CHANGELOG.md": "0df2f6f93be90875f7f9178efd59a847b5ae08efd189b0efd2c29ba2233ecac4",
+    "FAQ.md": "ab5485878e6d7d96e568c6c851f0edafa02b91d81fb18513c14e89806cd1d672",
+    "Images/CardDataFlow.png": "c184b54566ee0cc313bded98748078fb324f45b3ecd1e2e117d3bc2d91a61894",
+    "Images/CardDataFlow.svg": "f8ef039187292c801d9126e5f3859d904e9115f6aa987774e13719add354af9f",
+    "Images/CardLifecycle.png": "f69ceb615ada9716bd15983abc68aa26fd09b6a1abcc1e3045f77a4f8f2f6958",
+    "Images/CardLifecycle.svg": "5e2ab9cc98b832aa77b04c6478ba264c68205b17c2a39fae3839dbad8ba52784",
+    "Images/CardVisualPipeline.png": "0b74f614b4a1508edb87a76bb9dc4d06e486ab0467629484b61e21dfb50cf717",
+    "Images/CardVisualPipeline.svg": "4e395c66f8067eb567d0588137975c12a807c510f9cbe771f5a1f23efca51f2d",
+    "Images/HandLayout.png": "421c049517e28f981164f1c54b52409eb748e52fc26f093d43e15ca8ca815d69",
+    "Images/HandLayout.svg": "9aa3a06f658cc53e9b9214b9c48d2524a663dd3dbf9830a362bf986db647b0db",
+    "Images/HoverPipeline.png": "3c24de976c7309a7040fff62c8f6ced55546d587bd67a1aec278eaeb99bcde75",
+    "Images/HoverPipeline.svg": "a36939fa0a254b599ed0a56a9acd9a96c9bb5a111a276f02c2456702edf3845d",
+    "Images/InteractionPermissions.png": "f6c9ae44fc31bc852d35e477433ed8dea042b727a18ca08c47557af7941811e0",
+    "Images/InteractionPermissions.svg": "ac2700b5ba032b35bfe379a8f278175aad9d2e6a45d7e8e8fce3fa318841e775",
+    "Images/PlayResolution.png": "d673b3ee63ae9cb160a7cb384fb98901141b8269f03ab26a05d040b251af6aec",
+    "Images/PlayResolution.svg": "0ea2ad776fd1eeb3ab79da9d0222f2071a2f2b40738256329ca3e5082877fe6a",
+    "Images/README.md": "5ca7dd045d1cbee12619c55b477bcf1158eaedae0a883c13d0ecb0ed29430324",
+    "Images/ToolkitOverview.png": "fd82f58ea355f7289c50bb427fcec99f59ff0c6ab8b545dbb2ed5e696e6b2882",
+    "Images/ToolkitOverview.svg": "580ee2b80919157165435fafbac2a651dd8135b0cd944bb89494bb1693023576",
+    "Images/UnityCardAnchoring.png": "987112d3a33b5550786451a2cb5a92b5286651f10b3e572326814a25263eb87f",
+    "Images/WorldViewAnchoring_Template.png": "c8f1f8c956914d319ae68cb27763ad108c1452085589baf8a4fc36a100f13607",
+    "LICENSE.md": "ef517936129f57b1be8409363127fbe67610ef53e70f750442dbce24cdd2fe95",
+    "QuickStart.md": "96f549903121ace8506527e3b71914c016426f6ba7e32183574ae50fbe813378",
+    "README.md": "d1015ac0d47307b4a2f7b0581383bdef114b63a2b0111dbba9c1cdc15bf0ca41"
+  }
+}

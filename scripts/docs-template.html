@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- {{marker}} -->
+  <title>{{title}} · {{product}} {{version}} documentation · IndieWest</title>
+  <meta name="description" content="{{description}}">
+  <meta name="color-scheme" content="light dark">
+  <link rel="icon" href="{{root}}assets/favicon-32.png" sizes="32x32">
+  <link rel="icon" href="{{root}}assets/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="{{root}}assets/apple-touch-icon.png">
+  <link rel="stylesheet" href="{{root}}assets/site.css">
+</head>
+<body>
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="wordmark" href="{{root}}index.html">Indie<span>West</span></a>
+      <nav class="site-nav" aria-label="Main">
+        <ul>
+          <li><a href="{{root}}index.html#tools">Tools</a></li>
+          <li><a href="{{root}}index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <div class="container docs-layout">
+    <aside class="docs-sidebar">
+      <p class="docs-product"><a href="{{productHref}}">{{product}}</a> <span class="docs-version">Version {{version}}</span></p>
+      <nav class="docs-nav" aria-label="Documentation">
+        <ul>
+          {{nav}}
+        </ul>
+      </nav>
+    </aside>
+
+    <main id="content" class="prose" tabindex="-1">
+{{content}}
+      <p class="back-to-top"><a href="#content">Back to top</a></p>
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <a class="wordmark wordmark-small" href="{{root}}index.html">Indie<span>West</span></a>
+      <p><a href="{{docsHref}}">{{product}} {{version}} documentation</a></p>
+    </div>
+  </footer>
+</body>
+</html>

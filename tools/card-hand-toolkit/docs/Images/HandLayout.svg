@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="432" viewBox="0 0 900 432" role="img" aria-labelledby="title desc">
+  <title id="title">Hand layout and focus</title>
+  <desc id="desc">The red Play Height line marks where to release a card to play. Orange card slots follow the purple fan curve. The reorder band accepts hand reordering, and the cyan hover anchor aligns hovered card bottoms. Click a card to focus the hand; click away to lower it.</desc>
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 Z" fill="#64748b"/></marker></defs>
+  <rect width="900" height="432" rx="20" fill="#f8fafc"/>
+  <g font-family="Segoe UI, Arial, sans-serif">
+    <text x="24" y="36" font-size="25" fill="#172b45" font-weight="700" text-anchor="start">Hand layout and focus</text>
+    <text x="24" y="63" font-size="16" fill="#52647a" font-weight="400" text-anchor="start">Select the Player Hand to see these guides in the Scene view.</text>
+    <rect x="24" y="104" width="500" height="244" rx="12" fill="#ffffff" stroke="#d6dfe9"/>
+    <text x="44" y="135" font-size="14" fill="#a83e48" font-weight="700" text-anchor="start">PLAY HEIGHT: release above to play</text>
+    <path d="M 44 150 H 504" stroke="#d55d68" stroke-width="2"/>
+    <path d="M 80 222 Q 274 164 468 222" fill="none" stroke="#8b67c8" stroke-width="2"/>
+    <rect x="100" y="188" width="48" height="52" rx="5" fill="#fff8eb" stroke="#db9b3d" stroke-width="2"/>
+    <rect x="170" y="178" width="48" height="52" rx="5" fill="#fff8eb" stroke="#db9b3d" stroke-width="2"/>
+    <rect x="240" y="174" width="48" height="52" rx="5" fill="#fff8eb" stroke="#db9b3d" stroke-width="2"/>
+    <rect x="310" y="178" width="48" height="52" rx="5" fill="#fff8eb" stroke="#db9b3d" stroke-width="2"/>
+    <rect x="380" y="188" width="48" height="52" rx="5" fill="#fff8eb" stroke="#db9b3d" stroke-width="2"/>
+    <rect x="44" y="254" width="460" height="26" rx="5" fill="#fff4df" stroke="#e3c78d"/>
+    <text x="58" y="272" font-size="14" fill="#825c17" font-weight="700" text-anchor="start">REORDER BAND: release here to reorder</text>
+    <path d="M 44 310 H 504" stroke="#2197a5" stroke-width="2"/>
+    <text x="44" y="334" font-size="14" fill="#167783" font-weight="700" text-anchor="start">HOVER ANCHOR: hovered card's bottom edge</text>
+    <path d="M 716 212 V 236" fill="none" stroke="#64748b" stroke-width="2" stroke-linejoin="round" marker-end="url(#arrow)"/>
+    <rect x="556" y="104" width="320" height="108" rx="12" fill="#eaf1ff" stroke="#a2bdec"/><text x="574" y="133" font-size="20" fill="#28559b" font-weight="700" text-anchor="start">Focus Position</text><text x="574" y="160" font-size="16" fill="#263e50" font-weight="400" text-anchor="start">Click or tap a card.</text><text x="574" y="183" font-size="16" fill="#263e50" font-weight="400" text-anchor="start">Hand raises and fans out.</text>
+    <rect x="556" y="236" width="320" height="108" rx="12" fill="#f0ebfc" stroke="#baa9e2"/><text x="574" y="265" font-size="20" fill="#63439b" font-weight="700" text-anchor="start">Unfocus Position</text><text x="574" y="292" font-size="16" fill="#263e50" font-weight="400" text-anchor="start">Click or tap away.</text><text x="574" y="315" font-size="16" fill="#263e50" font-weight="400" text-anchor="start">Hand lowers and bunches up.</text>
+    <text x="24" y="382" font-size="16" fill="#263e50" font-weight="400" text-anchor="start">Fan Layout Profile shapes the orange card slots along the purple fan curve.</text>
+    <text x="24" y="408" font-size="14" fill="#52647a" font-weight="400" text-anchor="start">Schematic only: spacing and positions depend on your profile and scene setup.</text>
+  </g>
+</svg>
