@@ -134,9 +134,21 @@ function enhanceImages(html, file, snapshot) {
   });
 }
 
-function renderMarkdown(md, file, pageOf, snapshot) {
+// Links to this site's own published address (docs also read inside Unity use them) become relative,
+// so they stay on the local copy and are checked like any other internal link.
+function siteLink(href, fromPath) {
+  if (!CONFIG.siteUrl || !href.startsWith(CONFIG.siteUrl)) return null;
+  const hash = href.indexOf('#');
+  const fragment = hash < 0 ? '' : href.slice(hash);
+  let target = decodeURI(hash < 0 ? href.slice(CONFIG.siteUrl.length) : href.slice(CONFIG.siteUrl.length, hash));
+  if (target === '' || target.endsWith('/')) target += 'index.html';
+  return target === fromPath && fragment ? fragment : hrefTo(fromPath, target) + fragment;
+}
+
+function renderMarkdown(md, file, pageOf, snapshot, product) {
   const seen = {};
   let firstH1 = null;
+  const pagePath = posix.join(product.output, pageOf.get(file));
   const resolve = href => posix.normalize(posix.join(posix.dirname(file), decodeURI(href)));
   const marked = new Marked({ gfm: true });
   marked.use({
@@ -160,7 +172,7 @@ function renderMarkdown(md, file, pageOf, snapshot) {
       link(token) {
         const m = token.href.match(/^([^:?#]+\.md)(#.*)?$/i);
         const target = m && pageOf.get(resolve(m[1]));
-        const href = target ? hrefTo(pageOf.get(file), target) + (m[2] ?? '') : token.href;
+        const href = target ? hrefTo(pageOf.get(file), target) + (m[2] ?? '') : siteLink(token.href, pagePath) ?? token.href;
         return Renderer.prototype.link.call(this, { ...token, href });
       },
     },
@@ -199,7 +211,7 @@ async function render(product) {
   const pages = [];
   for (const file of order) {
     const md = lf(await readFile(path.join(snapshot, file), 'utf8'));
-    const { html, firstH1 } = renderMarkdown(md, file, pageOf, snapshot);
+    const { html, firstH1 } = renderMarkdown(md, file, pageOf, snapshot, product);
     const title = configured.find(p => p.file === file)?.title ?? firstH1 ?? file;
     pages.push({ file, out: pageOf.get(file), md, html, title });
   }

@@ -65,7 +65,7 @@ What each step does:
 - **import** copies every file except Unity `.meta` files into `docs-src/<product>/`, unchanged, and writes `IMPORT.json` with the source path, import time and a SHA-256 for each file. It lists what was added, changed or removed.
 - **build** renders `docs-src/<product>/` into the product's `docs/` folder:
   - Each top-level Markdown file becomes a page: `QuickStart.md` becomes `quickstart.html` (lowercase), and `README.md` becomes the docs home page. Markdown in subfolders, such as `Images/README.md`, is treated as a maintainer note and isn't published.
-  - Links between Markdown files, such as `API.md#zones--play`, become links between pages. External links are left alone.
+  - Links between Markdown files, such as `API.md#zones--play`, become links between pages. So do links to this site's own published address (`siteUrl` in `scripts/docs.config.json`), such as `https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts`, which the docs use so they also work inside Unity. These are made relative and checked like any other internal link. Other external links are left alone.
   - Headings get the same IDs GitHub gives them, so existing anchors keep working. Raw HTML anchors such as `<a id="quick-start-art">` are kept.
   - Code blocks keep their exact text. Blocks marked ` ```csharp ` get syntax highlighting at build time (no JavaScript on the page); unmarked blocks stay plain. To highlight another language, vendor its highlight.js grammar and register it at the top of `scripts/docs.mjs`.
   - Images, including raw `<img>` tags, load lazily and get a height so the page doesn't jump while they load. Wide code and tables scroll inside their own box.
@@ -96,7 +96,7 @@ Before or at launch:
 - [ ] **Release status.** Both pages say "Available now". Publish the site when the Asset Store listing goes live.
 - [ ] **Discord invite.** <https://discord.gg/rC7wVukEpu> is used for contact and support (taken from the Quick Start). Make sure the invite never expires.
 - [ ] **Support email (optional).** There's no email on the site. To add one, put a `mailto:` button in the Contact section of `index.html`.
-- [ ] **Custom domain (optional).** The canonical and social-preview URLs use `https://david3214.github.io/IndieWest/`. If the address changes, search for `david3214.github.io` and update them.
+- [ ] **Custom domain (optional).** The canonical and social-preview URLs use `https://david3214.github.io/IndieWest/`. If the address changes, search for `david3214.github.io` and update them, including `siteUrl` in `scripts/docs.config.json` and the links in the Unity docs.
 
 Already set:
 

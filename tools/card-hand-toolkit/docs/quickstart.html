@@ -65,7 +65,7 @@
 <li><strong>Unity:</strong> 2023.1 or newer</li>
 <li><strong>Input:</strong> Works with both Legacy and New Input System (no extra setup required)</li>
 <li><strong>Render pipeline:</strong> URP or Built-In (HDRP not yet tested)</li>
-<li><strong>TextMeshPro:</strong> Required for card text. It&#39;s included by default in new Unity projects (in Unity 6 it&#39;s part of the uGUI package). The first time card text appears, Unity may ask you to import <strong>TMP Essentials</strong>. Click <strong>Import</strong>.</li>
+<li><strong>UI packages:</strong> Requires <strong>Unity UI (uGUI)</strong> and <strong>TextMeshPro</strong> for card text and the hover overlay. They&#39;re included by default in new Unity projects (in Unity 6 TextMeshPro is part of uGUI). If either is missing, install it through <strong>Window ▸ Package Manager</strong>. The first time card text appears, Unity may ask you to import <strong>TMP Essentials</strong>. Click <strong>Import</strong>.</li>
 <li><strong>Platforms:</strong> Desktop &amp; Mobile</li>
 </ul>
 <blockquote>
@@ -100,10 +100,10 @@
 <p><strong>Goal:</strong> Create your own copies of the toolkit&#39;s assets and a first scene to play in.</p>
 </blockquote>
 <ol>
-<li>Go to <strong>Tools ▸ Card Toolkit ▸ Setup Wizard</strong>. The <strong>Welcome</strong> page checks your Unity version, render pipeline and input setup. Nothing in your project changes until you click <strong>Finish</strong>.</li>
+<li>Go to <strong>Tools ▸ Card Toolkit ▸ Setup Wizard</strong>. The <strong>Welcome</strong> page checks your Unity version, render pipeline and input setup. The wizard saves its settings as you go, creates assets when you use the <strong>Create</strong> buttons, and sets up your scene when you click <strong>Finish</strong>.</li>
 <li>On <strong>Libraries</strong>, click <strong>Create</strong> next to each of the seven fields. Each one makes your own copy in <code>Assets/CardHandToolkit/Config/</code>. Section 3 explains what each one is for.</li>
 <li>On <strong>Game Scene</strong>, keep <strong>Create New</strong> and the default name, or choose <strong>Use Existing</strong> to set up a scene you already have. The loader and a Player Hand are always added. The Hover Presenter and <strong>Game Camera + Background</strong> are on by default; the camera and background are added together only when creating a new scene. The Opponent Hand and play zones are optional. Tick <strong>Line Play Zone</strong> if you want to play cards into a zone in Section 4. Hover over a checkbox to see what it adds.</li>
-<li>On <strong>Samples &amp; Docs</strong>, click <strong>Finish</strong>.</li>
+<li>On <strong>Samples &amp; Docs</strong>, the documentation buttons open the online guides in your browser. Click <strong>Finish</strong> to complete setup.</li>
 </ol>
 <p>The Wizard saves your scene with <code>CHT_CardToolkitLoader</code> (wired to your new assets), a Player Hand and anything else you ticked, and adds it to Build Settings. Press <strong>Play</strong> from that scene: it runs without errors, and the hand stays empty until Section 4 draws cards into it.</p>
 <blockquote>
@@ -774,6 +774,7 @@
 <div class="heading"><h2 id="3-community--support">3) Community &amp; Support</h2><a class="heading-anchor" href="#3-community--support" aria-label="Link to section: 3) Community &amp; Support">#</a></div>
 <p>If you have questions, feedback, or want to show what you’ve built:</p>
 <ul>
+<li><strong><a href="../index.html">Toolkit website</a></strong> — the official Card Hand Toolkit product page.</li>
 <li><strong>Discord</strong> — <a href="https://discord.gg/rC7wVukEpu">link</a> join the discussion, <strong>Report an Issue</strong>, or <strong>Contact Support</strong>.</li>
 <li><strong>Ask the CHT Assistant (GPT)</strong> — Access via link <a href="https://chatgpt.com/g/g-68f00e7f8b248191a7dd41a0089b15d7-card-hand-toolkit-assistant-cht-assistant">here</a></li>
 <li><strong><a href="https://youtu.be/L_v_jIwN_XA">Watch the Quick Start Tutorial</a></strong> — Recreate the included sample game from a fresh Unity project.</li>

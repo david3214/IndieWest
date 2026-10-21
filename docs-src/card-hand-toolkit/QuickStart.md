@@ -1,14 +1,14 @@
 ## Table of Contents
 
-- [Getting Started & Install](#quick-start-install)
-- [Run the Setup Wizard](#quick-start-wizard)
-- [Create Your CardPlayable Variant](#quick-start-create-cardplayable)
-- [Make It Play (Drawing a Card)](#quick-start-make-it-play)
-- [Make Cards Look Like Yours (No Code)](#quick-start-visual-customization)
-- [Add Your Own Card Data (Cost and Suit)](#quick-start-custom-data)
-- [Next Steps](#quick-start-next-steps)
-- [Appendix A: Card Art](#quick-start-art)
-- [Appendix B: How Fields Show and Hide](#quick-start-field-visibility)
+- [Getting Started & Install](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-install)
+- [Run the Setup Wizard](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-wizard)
+- [Create Your CardPlayable Variant](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-create-cardplayable)
+- [Make It Play (Drawing a Card)](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-make-it-play)
+- [Make Cards Look Like Yours (No Code)](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-visual-customization)
+- [Add Your Own Card Data (Cost and Suit)](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data)
+- [Next Steps](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-next-steps)
+- [Appendix A: Card Art](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art)
+- [Appendix B: How Fields Show and Hide](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility)
 
 <a id="quick-start-install"></a>
 
@@ -21,7 +21,7 @@
 - **Unity:** 2023.1 or newer
 - **Input:** Works with both Legacy and New Input System (no extra setup required)
 - **Render pipeline:** URP or Built-In (HDRP not yet tested)
-- **TextMeshPro:** Required for card text. It's included by default in new Unity projects (in Unity 6 it's part of the uGUI package). The first time card text appears, Unity may ask you to import **TMP Essentials**. Click **Import**.
+- **UI packages:** Requires **Unity UI (uGUI)** and **TextMeshPro** for card text and the hover overlay. They're included by default in new Unity projects (in Unity 6 TextMeshPro is part of uGUI). If either is missing, install it through **Window ▸ Package Manager**. The first time card text appears, Unity may ask you to import **TMP Essentials**. Click **Import**.
 - **Platforms:** Desktop & Mobile
 
 > **Install type:** This asset is distributed as a classic **`.unitypackage`** (not UPM). Paths below assume import into `Assets/CardHandToolkit/…`. If you import to a different folder, adjust paths accordingly.
@@ -59,10 +59,10 @@ Assets/
 
 > **Goal:** Create your own copies of the toolkit's assets and a first scene to play in.
 
-1. Go to **Tools ▸ Card Toolkit ▸ Setup Wizard**. The **Welcome** page checks your Unity version, render pipeline and input setup. Nothing in your project changes until you click **Finish**.
+1. Go to **Tools ▸ Card Toolkit ▸ Setup Wizard**. The **Welcome** page checks your Unity version, render pipeline and input setup. The wizard saves its settings as you go, creates assets when you use the **Create** buttons, and sets up your scene when you click **Finish**.
 2. On **Libraries**, click **Create** next to each of the seven fields. Each one makes your own copy in `Assets/CardHandToolkit/Config/`. Section 3 explains what each one is for.
 3. On **Game Scene**, keep **Create New** and the default name, or choose **Use Existing** to set up a scene you already have. The loader and a Player Hand are always added. The Hover Presenter and **Game Camera + Background** are on by default; the camera and background are added together only when creating a new scene. The Opponent Hand and play zones are optional. Tick **Line Play Zone** if you want to play cards into a zone in Section 4. Hover over a checkbox to see what it adds.
-4. On **Samples & Docs**, click **Finish**.
+4. On **Samples & Docs**, the documentation buttons open the online guides in your browser. Click **Finish** to complete setup.
 
 The Wizard saves your scene with `CHT_CardToolkitLoader` (wired to your new assets), a Player Hand and anything else you ticked, and adds it to Build Settings. Press **Play** from that scene: it runs without errors, and the hand stays empty until Section 4 draws cards into it.
 
@@ -72,7 +72,7 @@ The Wizard saves your scene with `CHT_CardToolkitLoader` (wired to your new asse
 
 > **More scenes:** Every scene with cards needs a `CHT_CardToolkitLoader`. To add one to another scene, open both scenes, then copy the loader from your Game scene's Hierarchy and paste it into the other one. When you switch scenes at runtime, the first loader persists and later ones remove themselves.
 
-> **Errors when you press Play?** See [Troubleshooting](FAQ.md#troubleshooting) in the FAQ.
+> **Errors when you press Play?** See [Troubleshooting](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/faq.html#troubleshooting) in the FAQ.
 
 <a id="quick-start-create-cardplayable"></a>
 
@@ -106,7 +106,7 @@ The **CHT_CardToolkitLoader** in your Game scene now references this Visual Fact
    - **Card Name**
    - **Rules Text**
    - **Frame Key** (optional; leave empty to use the default frame)
-   - **Card Art** (sprite). This is the card's illustration only, not the whole card. The frame, back and text are set up separately. **Section 5** covers how art, frames and text fit together, and [Appendix A](#quick-start-art) covers how to prepare your art.
+   - **Card Art** (sprite). This is the card's illustration only, not the whole card. The frame, back and text are set up separately. **Section 5** covers how art, frames and text fit together, and [Appendix A](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) covers how to prepare your art.
    - Any custom data fields your ViewModel reads create as an Addon that will be a part of the addon list on the ScriptableCard. (We'll cover this in a later section)
 
 > Each `ScriptableCard` represents gameplay data only; visuals are handled by the worldViewPrefab + global skin at runtime.
@@ -139,7 +139,7 @@ Then try it out:
 
 > **Expected warning:** A card placed by hand has no card data yet, so you'll see `CardBehaviour: No definition set for card …, cannot push textures to views.` in the Console. That's normal for this test — cards drawn at runtime (Section 4) get their definition automatically.
 
-For deeper visual customization (changing frame style, world-view prefab, etc.), see **Section 5** and the [API Reference](API.md).
+For deeper visual customization (changing frame style, world-view prefab, etc.), see **Section 5** and the [API Reference](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html).
 
 ---
 
@@ -255,7 +255,7 @@ Press **Play**. After a short pause, you’ll see cards drawn one by one into th
 > - **Text:** the card's name and rules text, drawn by the **World View Prefab**.
 > - **Back:** the card back, from the **CardFrameLibrary**. The Wizard's library starts with a placeholder back.
 >
-> **Section 5** shows how to replace the placeholders with your own frame, back and layout. [Appendix A](#quick-start-art) covers preparing your art.
+> **Section 5** shows how to replace the placeholders with your own frame, back and layout. [Appendix A](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) covers preparing your art.
 
 ## 4) Play a card
 
@@ -302,11 +302,11 @@ When you drag a card above the **Play Height** line, it triggers the card’s �
 
 > **Goal:** Replace the placeholder frame and back, see how the name and rules text get onto a card, and control which fields show.
 
-> **Want a field the toolkit doesn't have, like Cost or Attack?** This section only works with the built-in fields: name, rules text, art and frame. A new text object needs something to fill it with data, so adding one here will just show placeholder text. **[Section 6](#quick-start-custom-data)** walks through adding your own field.
+> **Want a field the toolkit doesn't have, like Cost or Attack?** This section only works with the built-in fields: name, rules text, art and frame. A new text object needs something to fill it with data, so adding one here will just show placeholder text. **[Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data)** walks through adding your own field.
 
 ## 1) Use your own frame and back
 
-1. Make your frame and back images at 1000×1400 (5:7, the card's ratio) and import them as sprites. [Appendix A: Card Art](#quick-start-art) has the full import settings.
+1. Make your frame and back images at 1000×1400 (5:7, the card's ratio) and import them as sprites. [Appendix A: Card Art](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) has the full import settings.
 2. Open `Config/CardFrameLibrary.asset`.
 3. Set **Default Frame** to your frame and **Default Card Back** to your back.
 4. Press **Play**. Every card now uses your frame and back.
@@ -341,7 +341,7 @@ Edit the text objects in `WorldViewPrefab_User` like any UI: font, size, color, 
 
 Press **Play** to check the result on the cards in your hand.
 
-> Adding a new text object here won't fill it with card data. To add your own field, see **[Section 6](#quick-start-custom-data)**.
+> Adding a new text object here won't fill it with card data. To add your own field, see **[Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data)**.
 
 ## 4) Turn a field off
 
@@ -349,7 +349,7 @@ Press **Play** to check the result on the cards in your hand.
 2. In **Enabled Fields**, untick **Rules Text**.
 3. Press **Play**. The rules text is hidden on every card.
 
-Tick it again to bring it back. The Card Skin turns fields on or off for your whole game without editing the prefab. A field also hides on its own for any card with no data for it, such as a card with empty Rules Text. [Appendix B](#quick-start-field-visibility) has the full rules.
+Tick it again to bring it back. The Card Skin turns fields on or off for your whole game without editing the prefab. A field also hides on its own for any card with no data for it, such as a card with empty Rules Text. [Appendix B](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility) has the full rules.
 
 ## 5) Check the hover overlay
 
@@ -397,7 +397,7 @@ namespace CardHandToolkit.Samples
 
 ## 2) Read the cost: a ViewModel
 
-A ViewModel turns card data into what the card displays. `Sample_CardVM` fills the same built-in fields as the toolkit's `DefaultCardVM` and adds `Cost`. It also reads a `Suit`, which [step 8](#quick-start-suits) covers. If you're writing your own copies, leave the suit lines out until then.
+A ViewModel turns card data into what the card displays. `Sample_CardVM` fills the same built-in fields as the toolkit's `DefaultCardVM` and adds `Cost`. It also reads a `Suit`, which [step 8](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-suits) covers. If you're writing your own copies, leave the suit lines out until then.
 
 ```csharp
 using System;
@@ -498,7 +498,7 @@ namespace CardHandToolkit.Samples
 
 ## 4) Show the cost: a binder
 
-The binder writes ViewModel data into the UI. `Sample_CardViewBinder` extends the toolkit's default binder, so the name and rules text keep working, and adds a Cost text. Its suit icon and suit colors are for [step 8](#quick-start-suits).
+The binder writes ViewModel data into the UI. `Sample_CardViewBinder` extends the toolkit's default binder, so the name and rules text keep working, and adds a Cost text. Its suit icon and suit colors are for [step 8](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-suits).
 
 ```csharp
 using TMPro;
@@ -563,7 +563,7 @@ Press **Play**:
 
 If the cost never shows, check that the FieldToggle's **Custom Key**, the **Enabled Custom Fields** entry and `CostKey` all say `Cost`. A key that's missing from the Card Skin logs a one-time warning in the Console.
 
-> To show something only on cards _without_ a cost, or to toggle several objects from one key, see **Invert** and **Targets** in [Appendix B](#quick-start-field-visibility).
+> To show something only on cards _without_ a cost, or to toggle several objects from one key, see **Invert** and **Targets** in [Appendix B](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility).
 
 ## 7) (Optional) Change the cost at runtime
 
@@ -655,7 +655,7 @@ If the cost doesn't change color, check that the palette is assigned on the Card
 
 > You now have a working setup: cards that draw, display data, and can be played into zones!
 
-With your toolkit configured, you can start shaping your own game’s rules, visuals, and card logic. Start with the [Concepts](API.md#concepts) in the API Reference, then use its guides for each part of the toolkit.
+With your toolkit configured, you can start shaping your own game’s rules, visuals, and card logic. Start with the [Concepts](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts) in the API Reference, then use its guides for each part of the toolkit.
 
 ---
 
@@ -663,21 +663,22 @@ With your toolkit configured, you can start shaping your own game’s rules, vis
 
 | Guide | What it covers |
 | --- | --- |
-| **[Zones & Play](API.md#zones--play)** | How a drag becomes a play, the example zones and their Drop Area, moving cards from code, and writing your own `IPlayResolver`. |
-| **[Card Data & Decks](API.md#card-data--decks)** | Cards and copies (`CardRef`), decks, drawing, discarding and reshuffling, and `HandStateService`. |
-| **[Card Visuals](API.md#card-visuals)** | How the Visual Factory, Card Skin, view model, binder and field toggles fit together; changing cards at runtime; finished card images. |
-| **[Interaction](API.md#interaction)** | Hover, drag and tap; interaction policies, including turn-based rules; the Hover Profile and hover previews. |
-| **[Hands & Layout](API.md#hands--layout)** | The Player Hand's focus, Play Height and reordering; opponent hands; shaping the fan. |
+| **[Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)** | How a drag becomes a play, the example zones and their Drop Area, moving cards from code, and writing your own `IPlayResolver`. |
+| **[Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)** | Cards and copies (`CardRef`), decks, drawing, discarding and reshuffling, and `HandStateService`. |
+| **[Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)** | How the Visual Factory, Card Skin, view model, binder and field toggles fit together; changing cards at runtime; finished card images. |
+| **[Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)** | Hover, drag and tap; interaction policies, including turn-based rules; the Hover Profile and hover previews. |
+| **[Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)** | The Player Hand's focus, Play Height and reordering; opponent hands; shaping the fan. |
 
 ## 2) Where to go next
 
-- **[API Reference](API.md)**: the guides above, plus an A–Z entry for every public type.
-- **[FAQ](FAQ.md)**: answers to common setup and integration questions.
+- **[API Reference](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html)**: the guides above, plus an A–Z entry for every public type.
+- **[FAQ](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/faq.html)**: answers to common setup and integration questions.
 
 ## 3) Community & Support
 
 If you have questions, feedback, or want to show what you’ve built:
 
+- **[Toolkit website](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/)** — the official Card Hand Toolkit product page.
 - **Discord** — [link](https://discord.gg/rC7wVukEpu) join the discussion, **Report an Issue**, or **Contact Support**.
 - **Ask the CHT Assistant (GPT)** — Access via link [here](https://chatgpt.com/g/g-68f00e7f8b248191a7dd41a0089b15d7-card-hand-toolkit-assistant-cht-assistant)
 - **[Watch the Quick Start Tutorial](https://youtu.be/L_v_jIwN_XA)** — Recreate the included sample game from a fresh Unity project.
