@@ -6,26 +6,26 @@
 
 ## How to Use This Hub
 
-1. **Read [Concepts](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts)** for the big picture.
-2. **Read the [Module](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#modules)** for the part you're working on. Each one is a short guide: how its pieces fit, common tasks and code.
-3. **Look types up in the [A–Z Type Index](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#az-type-index).** Each entry says what the type does, then lists its **Inspector** settings and key **Members**, and links to its module under **Guide**.
+1. **Read [Concepts](#concepts)** for the big picture.
+2. **Read the [Module](#modules)** for the part you're working on. Each one is a short guide: how its pieces fit, common tasks and code.
+3. **Look types up in the [A–Z Type Index](#az-type-index).** Each entry says what the type does, then lists its **Inspector** settings and key **Members**, and links to its module under **Guide**.
 
-New to the toolkit? Start with the [Quick Start](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html).
+New to the toolkit? Start with the [Quick Start](QuickStart.md).
 
 ---
 
 ## Table of Contents
 
-- [Concepts](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts)
-- [Modules](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#modules)
-  - [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
-  - [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)
-  - [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
-  - [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
-  - [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)
+- [Concepts](#concepts)
+- [Modules](#modules)
+  - [Interaction](#interaction)
+  - [Zones & Play](#zones--play)
+  - [Card Data & Decks](#card-data--decks)
+  - [Card Visuals](#card-visuals)
+  - [Hands & Layout](#hands--layout)
 
-- [A–Z Type Index](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#az-type-index)
-- [FAQ](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/faq.html)
+- [A–Z Type Index](#az-type-index)
+- [FAQ](FAQ.md)
 
 ---
 
@@ -33,37 +33,37 @@ New to the toolkit? Start with the [Quick Start](https://david3214.github.io/Ind
 
 <img src="Images/ToolkitOverview.png" alt="Runtime hub supplies shared assets while game code updates hand state and hand views show the cards." width="760">
 
-- **One runtime hub.** `CardToolkitRuntime`, on the `CHT_CardToolkitLoader` prefab, holds the project-wide references every system reads. Reach it through `CardToolkitRuntime.Instance`.
-- **Your code owns the game; the toolkit shows it.** Hands never add or remove cards on their own: your code changes `HandStateService` (and your `Deck`), and the hands follow. The toolkit has no rules engine. Costs, suits, turns and phases belong to your game, through addons, view models and interaction policies.
-- **A card has three parts.** A `ScriptableCard` is the design, a `CardRef` is one copy of it in play, and the card GameObject shows that copy. On the GameObject, `CardBehaviour` holds its state, the card mesh and World View draw it, and `CardHoverable`, `DragCard` and `CardTap` handle the player's input.
+- **One runtime hub.** [`CardToolkitRuntime`](#cardtoolkitruntime-c), on the `CHT_CardToolkitLoader` prefab, holds the project-wide references every system reads. Reach it through `CardToolkitRuntime.Instance`.
+- **Your code owns the game; the toolkit shows it.** Hands never add or remove cards on their own: your code changes [`HandStateService`](#handstateservice-l) (and your [`Deck`](#deck-l)), and the hands follow. The toolkit has no rules engine. Costs, suits, turns and phases belong to your game, through addons, view models and interaction policies.
+- **A card has three parts.** A [`ScriptableCard`](#scriptablecard-c) is the design, a [`CardRef`](#cardref-l) is one copy of it in play, and the card GameObject shows that copy. On the GameObject, [`CardBehaviour`](#cardbehaviour-l) holds its state, the card mesh and World View draw it, and [`CardHoverable`](#cardhoverable-c), [`DragCard`](#dragcard-c) and [`CardTap`](#cardtap-c) handle the player's input.
 
 ### Who owns what?
 
 | Information | Owner |
 | --- | --- |
-| A card design and its addon data | `ScriptableCard`, listed in the `CardDatabase`. |
-| One copy's identity | `CardRef`: a slug plus a unique instance id. `CardBehaviour` carries that identity on its GameObject. |
-| Draw and discard pile contents | Your runtime `Deck<CardRef>`. |
-| Hand membership, by seat | `HandStateService`. Hand views follow its events. |
-| Existing card visuals | `SceneCardLookup` maps instance ids to `CardBehaviour`s; it doesn't own game state. |
-| Runtime display data and capabilities | The card's `ICardViewModel`. Your code changes it and raises `OnChanged`. |
-| Face-down, exhausted, hover and selection state | `CardBehaviour`, which refreshes the card's views. |
-| Binding and field visibility | `CardPresenter` and `HoverPresenter`, using the ViewModel and Card Skin. |
+| A card design and its addon data | [`ScriptableCard`](#scriptablecard-c), listed in the [`CardDatabase`](#carddatabase-c). |
+| One copy's identity | [`CardRef`](#cardref-l): a slug plus a unique instance id. [`CardBehaviour`](#cardbehaviour-l) carries that identity on its GameObject. |
+| Draw and discard pile contents | Your runtime [`Deck<CardRef>`](#deck-l). |
+| Hand membership, by seat | [`HandStateService`](#handstateservice-l). Hand views follow its events. |
+| Existing card visuals | [`SceneCardLookup`](#scenecardlookup-l) maps instance ids to [`CardBehaviour`](#cardbehaviour-l)s; it doesn't own game state. |
+| Runtime display data and capabilities | The card's [`ICardViewModel`](#icardviewmodel-e). Your code changes it and raises `OnChanged`. |
+| Face-down, exhausted, hover and selection state | [`CardBehaviour`](#cardbehaviour-l), which refreshes the card's views. |
+| Binding and field visibility | [`CardPresenter`](#cardpresenter-sealed-l) and [`HoverPresenter`](#hoverpresenter--ihoverpresenter-ce), using the ViewModel and [Card Skin](#cardskin-c). |
 | Rules, turns and effects | Your game code. |
 
 ### Card lifecycle
 
 <img src="Images/CardLifecycle.png" alt="A drawn CardRef enters hand state, reuses or builds its visual, then stays in hand or moves to an accepting play zone." width="760">
 
-The hand checks `SceneCardLookup` before building a visual, so a card returning from a zone keeps its existing GameObject and ViewModel. In SingleSprite mode, the presenter skips the World View. The [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks), [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals) and [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play) guides cover each step.
+The hand checks [`SceneCardLookup`](#scenecardlookup-l) before building a visual, so a card returning from a zone keeps its existing GameObject and ViewModel. In [SingleSprite mode](#finished-card-images-singlesprite-mode), the presenter skips the World View. The [Card Data & Decks](#card-data--decks), [Card Visuals](#card-visuals) and [Zones & Play](#zones--play) guides cover each step.
 
 ### Extend, configure or learn
 
 Every A–Z entry carries a tag:
 
-- **[E] Extend:** interfaces and base classes you implement for your own behavior: `ICardZone`, `IPlayResolver`, `ILockableZone`, `IZoneHoverAnchorProvider`, `CardAddon`, `ICardViewModel`, `ICardViewModelFactory`, `ICardViewBinder`, `ICardView`, `IContextualSwitcher`, `IInteractionPolicy`, `IInteractionOverride`, `IHoverPresenter`, `IPointerSource`, `IEmptyDeckPolicy`, `ICardVisualFactory`.
-- **[C] Configure:** components and assets you set up in the Inspector: `CardToolkitRuntime`, `PlayerHand`, `OpponentHand`, the example zones, `CardSkin`, `CardFrameLibrary`, `CardVisualFactorySO`, `HoverProfile`, `HoverRoutingPolicy`, `FanLayoutProfile`.
-- **[L] Learn:** types you call or read but don't change: `CardBehaviour`, `HandStateService`, `Deck`, `CardPresenter`, `SceneCardLookup`, `InteractionController`.
+- **[E] Extend:** interfaces and base classes you implement for your own behavior: [`ICardZone`](#icardzone-e), [`IPlayResolver`](#iplayresolver-e), [`ILockableZone`](#iplayheightzone--ireorderbandzone--ilockablezone-e), [`IZoneHoverAnchorProvider`](#izonehoveranchorprovider-e), [`CardAddon`](#cardaddon-e), [`ICardViewModel`](#icardviewmodel-e), [`ICardViewModelFactory`](#icardviewmodelfactory-e), [`ICardViewBinder`](#icardviewbinder-e), [`ICardView`](#icardview-e), [`IContextualSwitcher`](#icontextualswitcher-e), [`IInteractionPolicy`](#iinteractionpolicy-e), [`IInteractionOverride`](#iinteractionoverride--cardinteractionoverride-ce), [`IHoverPresenter`](#hoverpresenter--ihoverpresenter-ce), [`IPointerSource`](#pointerservice--ipointersource-le), [`IEmptyDeckPolicy`](#iemptydeckpolicy--reshuffleonempty--noreshufflepolicy-ec), [`ICardVisualFactory`](#icardvisualfactory-e).
+- **[C] Configure:** components and assets you set up in the Inspector: [`CardToolkitRuntime`](#cardtoolkitruntime-c), [`PlayerHand`](#playerhand-c), [`OpponentHand`](#opponenthand-c), the [example zones](#the-example-zones), [`CardSkin`](#cardskin-c), [`CardFrameLibrary`](#cardframelibrary-c), [`CardVisualFactorySO`](#cardvisualfactoryso-c), [`HoverProfile`](#hoverprofile-c), [`HoverRoutingPolicy`](#hoverroutingpolicy-c), [`FanLayoutProfile`](#fanlayoutprofile-c).
+- **[L] Learn:** types you call or read but don't change: [`CardBehaviour`](#cardbehaviour-l), [`HandStateService`](#handstateservice-l), [`Deck`](#deck-l), [`CardPresenter`](#cardpresenter-sealed-l), [`SceneCardLookup`](#scenecardlookup-l), [`InteractionController`](#interactioncontroller-l).
 
 > **Toolkit-owned assets:** assets prefixed `CHT_` (and everything in `Samples/`) are replaced when you update the package. Configure your own copies; the Setup Wizard creates them in `Assets/CardHandToolkit/Config/`.
 
@@ -83,9 +83,9 @@ _(hover, drag and tap, and what each card allows)_
 
 The card prefab (`CHT_CardPlayable_Template`, and your `CardPlayable_User` variant) has one component per interaction. Each reads the pointer from `PointerService`. Hover and tap ignore the pointer while it's over UI.
 
-- **`CardHoverable`:** hovering. See [Hover](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hover) below.
+- **`CardHoverable`:** hovering. See [Hover](#hover) below.
 - **`DragCard`:** dragging, which starts from a hovered card once the pointer moves past a threshold. Tune the feel on your card prefab: **Mouse Drag Threshold** and **Touch Drag Threshold** (pixels), **Tilt Strength**, **Lerp Speed** (smoothing), and **Drag Plane Z** (the depth the card follows while dragged).
-- **`CardTap`:** clicking or tapping. See [Tap and select](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#tap-and-select) below.
+- **`CardTap`:** clicking or tapping. See [Tap and select](#tap-and-select) below.
 - **`InteractionController`:** switches the three above on or off from the card's permissions.
 
 #### Permissions and policies
@@ -148,13 +148,13 @@ Out-of-hand previews are routed by **`HoverPolicyRuntime`** (on `CHT_CardToolkit
 - **Suppress When Pointer Over UI:** no preview while the pointer is over UI.
 - **Allow Face Down Preview:** off by default, so face-down cards never show a preview.
 
-The preview itself is drawn by a **`HoverPresenter`** in the scene, from the card's World View; see [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals) for its layout. If the scene has none, `HoverPolicyRuntime` creates one from its **Presenter Prefab**.
+The preview itself is drawn by a **`HoverPresenter`** in the scene, from the card's World View; see [Card Visuals](#card-visuals) for its layout. If the scene has none, `HoverPolicyRuntime` creates one from its **Presenter Prefab**.
 
 <img src="Images/HoverPipeline.png" alt="Pointer detection and touch arbitration update card hover state. In-hand hover changes the card pose; out-of-hand events pass through the routing policy to the overlay presenter." width="760">
 
 `HoverPointerArbiter` claims a card per touch pointer; mouse claims are skipped by default. Overlay exclusivity is a separate decision made by `HoverPolicyRuntime`, which subscribes directly to `CardBehaviour.OnAnyHoverEnter` and `OnAnyHoverExit`.
 
-For a custom hand's mouse-hover placement, implement [IZoneHoverAnchorProvider](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#izonehoveranchorprovider-e). The Player Hand uses [HoverPoseSolver](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hoverposesolver-l) to align the card's bottom edge with that anchor.
+For a custom hand's mouse-hover placement, implement [IZoneHoverAnchorProvider](#izonehoveranchorprovider-e). The Player Hand uses [HoverPoseSolver](#hoverposesolver-l) to align the card's bottom edge with that anchor.
 
 #### Tap and select
 
@@ -204,7 +204,7 @@ Releasing the card over the hand itself (inside its reorder band) reorders the h
 1. Remove the card from where it came from: `HandStateService.Instance.RemoveCard(seat, card.ToCardRef())` for a hand (the hand then lets go of it), or `fromZone.RemoveCard(card)` for any other zone.
 2. Add it with `AddCard(card)`, which parents it, applies the zone's **Card Facing**, and lays it out.
 
-On the board, the default interaction policy lets a card be hovered and selected, but not dragged. See [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction) to change that.
+On the board, the default interaction policy lets a card be hovered and selected, but not dragged. See [Interaction](#interaction) to change that.
 
 #### The example zones
 
@@ -279,7 +279,7 @@ _(what a card is, and how cards get from a deck into a hand)_
 #### Card data
 
 - **`ScriptableCard`** is one card design: **Slug** (its unique id), **Card Name**, **Rules Text**, **Frame Key**, **Tags**, **Card Art** and **Addons**. Create one with **Create ▸ Card Toolkit ▸ Card**. The slug is filled in from the asset name when you create it. Keep it unique, and don't change it once your game has saves or data files that refer to it.
-- **`CardAddon`** holds game-specific data such as cost or suit. Subclass it, then add one to a card with **+ Add New Addon** in the card's Inspector; it's saved inside the card asset. Read it with `card.GetAddon<T>()`. [Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data) walks through this.
+- **`CardAddon`** holds game-specific data such as cost or suit. Subclass it, then add one to a card with **+ Add New Addon** in the card's Inspector; it's saved inside the card asset. Read it with `card.GetAddon<T>()`. [Quick Start Section 6](QuickStart.md#quick-start-custom-data) walks through this.
 - **`CardDatabase`** lists every card your game can build. `CardToolkitRuntime` indexes it by slug when it starts, and the Visual Factory looks cards up there. A card that's missing from it can't be built, and the error names its slug.
 
 #### One card, many copies: `CardRef`
@@ -346,7 +346,7 @@ Each card is drawn in two layers, and they get their content from different plac
 - **The card mesh** draws the frame, the art and the back, through `Card3DView`. The frame and back come from the **`CardFrameLibrary`** (a card's **Frame Key** picks one of its **Frames**; empty or unmatched keys use the **Default Frame**). The art is the card's **Card Art**, drawn over the frame using the art's alpha, so transparent areas of the art show the frame through. The card prefab's materials only affect how cards look in the editor. `CardPoseView` animates the mesh: the flip for face-down cards, the tilt for exhausted (tapped) cards, and the hover scale.
 - **The World View** is a UI prefab on the card that shows the text and any other elements: name, rules text, a cost, a suit icon. It's set on the **`CardSkin`**. Every World View is laid out at 1000×1400 and scaled to fit the card (the skin's **World Scale**, where 1 fills it), and the same layout is reused for the hover preview at **Overlay Scale**. Use an `IContextualSwitcher` for deliberate differences between the two.
 
-[Quick Start Section 5](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-visual-customization) walks through restyling both layers, and [Appendix A](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) covers preparing art.
+[Quick Start Section 5](QuickStart.md#quick-start-visual-customization) walks through restyling both layers, and [Appendix A](QuickStart.md#quick-start-art) covers preparing art.
 
 #### From card data to the screen
 
@@ -354,7 +354,7 @@ Three pieces sit between a `ScriptableCard` and the World View, so each can be r
 
 - **View model** (`ICardViewModel`): the data a card displays: `Title`, `RulesText`, `ArtSprite`, `CardFrameSprite`, and `Capabilities`, the custom fields this card has, such as `"Cost"`. One is created **per card** by the **View Model Factory** on the Visual Factory. The default (`CHT_ViewModelFactory`) creates a `DefaultCardVM`, which fills the built-in fields. When a value changes, the view model raises `OnChanged`, and everything that shows the card updates, including an open hover preview.
 - **Binder** (`ICardViewBinder`, on the World View): writes the view model's data into the UI. It only sets data. The built-in `DefaultCardViewBinder` fills the name, rules text, art and frame; subclass it and override `Refresh` (calling `base.Refresh()` first) to fill your own elements. It also offers `Palette` (the skin's `CardColorPalette`) and `SetTextColor`/`ResetTextColor`, which tint a TextMeshPro text and its glow together.
-- **Field toggles** (`FieldToggle`, on World View elements): decide what's visible. A built-in field shows when the skin's **Enabled Fields** includes it and the view model has data for it. A custom field shows when its key is in the skin's **Enabled Custom Fields** and the view model has that capability. [Appendix B](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility) has the full rules.
+- **Field toggles** (`FieldToggle`, on World View elements): decide what's visible. A built-in field shows when the skin's **Enabled Fields** includes it and the view model has data for it. A custom field shows when its key is in the skin's **Enabled Custom Fields** and the view model has that capability. [Appendix B](QuickStart.md#quick-start-field-visibility) has the full rules.
 
 To show your own data, such as a cost:
 
@@ -364,7 +364,7 @@ To show your own data, such as a cost:
 4. Write the value into the World View in a binder that extends `DefaultCardViewBinder`.
 5. Add a `FieldToggle` with the custom key `Cost` to the element, and add `Cost` to the skin's **Enabled Custom Fields**.
 
-[Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data) builds this step by step, with Cost and Suit examples.
+[Quick Start Section 6](QuickStart.md#quick-start-custom-data) builds this step by step, with Cost and Suit examples.
 
 #### Changing cards at runtime
 
@@ -389,7 +389,7 @@ _(the player's and opponents' hands, and how cards fan out)_
 `PlayerHand` shows the cards `HandStateService` holds for its **Seat Id** (`0`, the local player) and handles everything the player does with them: focusing, hovering, reordering and playing.
 
 - **Focus:** the hand starts lowered at its **Unfocus Position**, with its cards bunched together. Clicking or tapping one of its cards moves it to its **Focus Position** (at **Hand Transition Speed**) and fans the cards out. Cards in the hand can only be hovered while it's focused.
-- **Playing and reordering:** a card dragged above **Play Height** is played (see [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)). Released inside the reorder band, a trigger collider on the hand sized from the fan layout (**Band Height**, **Band Depth**, **Min Band Width**), it moves to that spot in the hand instead.
+- **Playing and reordering:** a card dragged above **Play Height** is played (see [Zones & Play](#zones--play)). Released inside the reorder band, a trigger collider on the hand sized from the fan layout (**Band Height**, **Band Depth**, **Min Band Width**), it moves to that spot in the hand instead.
 - **Hover Anchor:** a child object marking where a mouse-hovered card's bottom edge lifts to. Keep it at or below the bottom edge of the screen.
 - Cards placed under the hand in the editor are adopted when the scene starts, for quick tests. They aren't in `HandStateService`, so prefer drawing cards in.
 
@@ -425,14 +425,14 @@ On the card mesh. Draws the frame, art and back through material property blocks
 
 - **Inspector:** **Card Mesh Renderer**, **Glow Mesh Renderer**, **Back Material Index**, **Front Material Index**.
 - **Members:** `ICardView`'s, which `CardBehaviour` calls.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### CardAddon **[E]**
 
 Base class for game-specific card data (cost, suit, attack…). Subclass it and add your own fields, then add one to a card with **+ Add New Addon** in the `ScriptableCard` Inspector. It's saved inside the card asset.
 
 - **Members:** none of its own; read yours with `scriptableCard.GetAddon<T>()`.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks); [Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data) builds Cost and Suit addons.
+- **Guide:** [Card Data & Decks](#card-data--decks); [Quick Start Section 6](QuickStart.md#quick-start-custom-data) builds Cost and Suit addons.
 
 ### CardBehaviour **[L]**
 
@@ -442,7 +442,7 @@ The root component of every card: its data, its instance id and its state flags 
   - Identity: `Definition` (the `ScriptableCard`), `InstanceId`, `ToCardRef()`.
   - State: `VisualState`, `SetFaceDown`, `SetExhausted`, `SetHighlighted(bool[, Color])`, `SetSelectable`, `SetSelected`, `SetDisabled`, `TapCard()`, `SnapView()`, `ForceRefresh()`.
   - Events: `OnCardTapped`, `OnCardSelected`, `OnCardUnselected`, `OnVisualStateChanged`, and the static `OnAnyCardTapped`, `OnAnyCardSelected`, `OnAnyCardUnselected`, `OnAnyHoverEnter`, `OnAnyHoverExit`, `OnAnyDragStart`, `OnAnyDragEnd`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction) for taps and selection.
+- **Guide:** [Card Visuals](#card-visuals); [Interaction](#interaction) for taps and selection.
 
 ### CardColorPalette **[C]**
 
@@ -450,7 +450,7 @@ A list of named colors (suits, rarities, factions…) for your binders to read b
 
 - **Inspector:** **Colors** (each entry is a **Key** and a **Color**).
 - **Members:** `TryGet(string key, out Color color)` (keys are case-sensitive).
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Section 6, step 8](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data) uses it for suit colors.
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Section 6, step 8](QuickStart.md#quick-start-custom-data) uses it for suit colors.
 
 ### CardDatabase **[C]**
 
@@ -458,7 +458,7 @@ Every `ScriptableCard` your game can build. Assign it on `CardToolkitRuntime`, w
 
 - **Inspector:** **Cards**. To add many at once, lock the Inspector and drag cards onto the **Cards** label.
 - **Members:** `cards`; at runtime, look cards up with `CardToolkitRuntime.CardBySlug`.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### CardFrameLibrary **[C]**
 
@@ -466,20 +466,20 @@ The frames and card backs cards are drawn with, assigned on `CardToolkitRuntime`
 
 - **Inspector:** **Default Card Back**, **Card Backs** (key + sprite, for `SetGlobalBackOverride`), **Default Frame**, **Frames** (key + sprite).
 - **Members:** `GetCardFrame(key)`, `GetCardBack(key)`, `DefaultFrame`, `DefaultCardBack`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Section 5](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-visual-customization) sets your own frame and back.
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Section 5](QuickStart.md#quick-start-visual-customization) sets your own frame and back.
 
 ### CardHoverable **[C]**
 
 On every card. Detects hover: pointer-over in the hand, and a short delay (mouse) or long press (touch) elsewhere. Its timings come from the `HoverProfile`. It's switched off when the card's permissions don't include `Hover`.
 
 - **Members:** `Hovered`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### CardPoseView **[L]**
 
 On the card's view root. Animates the card mesh from its state: flips face-down cards, tilts exhausted (tapped) ones, and scales and brings forward cards hovered in the hand, using the Hover Profile's **Hover Scale**, **Hover Anim Time** and **Hover Z Offset**.
 
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### CardPresenter (sealed) **[L]**
 
@@ -487,14 +487,14 @@ On each card: instantiates the Card Skin's World View Prefab, binds the card's v
 
 - **Inspector:** **View Anchor** (where the World View goes on the card).
 - **Members:** `ViewModel` (the card's view model, for runtime changes), `Skin`, `ViewAnchor`, `ViewDesignSize`, `ApplyDesignSize(RectTransform)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### CardRef **[L]**
 
 One copy of a card: a `CardSlug` (which `ScriptableCard` it is) plus a unique `InstanceId` (which copy). Two `CardRef`s are equal when their instance ids match. `DeckList.ToSlugDeck()` creates them for you.
 
 - **Members:** `CardRef(string instanceId, string cardSlug)`, `InstanceId`, `CardSlug`. Get one from a card with `card.ToCardRef()`, and the card back with `SceneCardLookup.TryGet(instanceId, out card)`.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### CardSkin **[C]**
 
@@ -502,21 +502,21 @@ Global look settings for every card, assigned on the Visual Factory: which World
 
 - **Inspector:** **World View Prefab**; **Overlay View Prefab Optional** (empty = the overlay reuses the World View); **World Scale** (1 = the view fills the card); **Overlay Scale** (on-screen size of the preview; 0.5 shows the 1000×1400 view at 500×700); **Display Mode** (`Modular`, or `SingleSprite` for finished card images); **Enabled Fields**; **Enabled Custom Fields**; **Color Palette**.
 - **Members:** the fields above, `GetWorldViewPrefab()`, `GetOverlayViewPrefab()`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### CardTap **[C]**
 
 On every card. Turns a click, or a tap shorter than the Hover Profile's **Touch Long Press Delay**, into `CardBehaviour.TapCard()`, which raises the tap events and toggles selection on selectable cards. It's switched off when the card's permissions don't include `Select`.
 
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### CardToolkitRuntime **[C]**
 
 The toolkit's runtime hub, on the `CHT_CardToolkitLoader` prefab, which every scene with cards needs (the Setup Wizard adds and wires it). It holds the project-wide references every system reads and persists across scenes; when scenes change, the first instance stays and later ones remove themselves. It logs an error on Play if no instance exists, and adds an EventSystem with the right input module to any scene without one. Cards need no dedicated layer: hover, drag and tap raycast against **Card Raycast Mask** and ignore trigger colliders.
 
-- **Inspector:** **Frame Library**, **Database**, **Hover Profile**, **Visual Factory**, **Override Policy Asset** (optional; see [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)), **Card Raycast Mask** (narrow it if other colliders block cards).
+- **Inspector:** **Frame Library**, **Database**, **Hover Profile**, **Visual Factory**, **Override Policy Asset** (optional; see [Interaction](#interaction)), **Card Raycast Mask** (narrow it if other colliders block cards).
 - **Members:** `Instance`, `IsReady`, `CardBySlug`, `FrameLibrary`, `Database`, `HoverProfile`, `VisualFactory`, `InteractionPolicy`, `CardRaycastMask`, `RaycastCards(Ray, out RaycastHit)`, `GetCardBack()`, `SetGlobalBackOverride(key)`.
-- **Guide:** [Concepts](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts); [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Concepts](#concepts); [Card Visuals](#card-visuals)
 
 ### CardVisualFactorySO **[C]**
 
@@ -524,7 +524,7 @@ The built-in `ICardVisualFactory` (the Setup Wizard creates `CardVisualFactory_U
 
 - **Inspector:** **Card Prefab**, **Global Card Skin**, **View Model Factory SO** (an `ICardViewModelFactory`; `CHT_ViewModelFactory` by default).
 - **Members:** `Build(CardRef, Transform spawnAt, bool knownToLocal = true)` (`knownToLocal: false` builds it face down), `VMFactory`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### CardZoneTracker **[C]**
 
@@ -532,14 +532,14 @@ On every card. Tracks the `ICardZone` the card is in (the nearest one among its 
 
 - **Inspector:** **Home Mode**: `FirstHandEncounter` (default: the first hand the card enters), `FirstZoneEncounter`, or `ExplicitOnly` (set only by `SetHomeZone`).
 - **Members:** `CurrentZone`, `HomeZone`, `SetHomeZone(ICardZone)`, `OnZoneChanged` (previous zone, new zone).
-- **Guide:** [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)
+- **Guide:** [Zones & Play](#zones--play)
 
 ### Deck **[L]**
 
 `Deck<TId>` is a runtime draw pile plus discard pile, a plain C# object your game code owns. The toolkit uses `Deck<CardRef>`, created from a `DeckList`. Index 0 is the top of the draw pile; the last entry is the top of the discard pile.
 
 - **Members:** `Draw(count)`, `Peek(count)`, `InsertTop`, `InsertBottom`, `Discard`, `Shuffle()`, `ShuffleRange(start, count)`, `Reshuffle()`, `Count`, `DiscardCount`, `SnapshotDrawPile()`, `SnapshotDiscardPile()`; events `CardDrawn`, `CardAdded`, `CardDiscarded`, `Shuffled`, `Reshuffled`, `CountsChanged`, `EmptyEvent`.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks), with a table of what each member does.
+- **Guide:** [Card Data & Decks](#card-data--decks), with a table of what each member does.
 
 ### DeckList **[C]**
 
@@ -547,14 +547,14 @@ The cards in a deck, as an asset (**Create ▸ Card Toolkit ▸ Deck List**). Li
 
 - **Inspector:** **Cards**.
 - **Members:** `ToSlugDeck(IEmptyDeckPolicy<CardRef> policy = null)` creates a new `Deck<CardRef>` in list order, with a fresh `CardRef` for every entry. Shuffle it before drawing.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### DefaultInteractionPolicy **[L]**
 
 The interaction policy used when no **Override Policy Asset** is assigned on `CardToolkitRuntime`. In the hand: hover, drag and select. On the board: hover, select and target. Everywhere else: nothing. Your own policy can call it for its defaults and change only what it needs.
 
 - **Members:** `GetPermissions(card, ctx)`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction), with the full table and an example that builds on it.
+- **Guide:** [Interaction](#interaction), with the full table and an example that builds on it.
 
 ### DefaultCardViewBinder **[E]**
 
@@ -562,14 +562,14 @@ The built-in `ICardViewBinder`, on the World View. Fills the name, rules text, a
 
 - **Inspector:** **Title**, **Rules Text** (TextMeshPro texts), **Art**, **Frame** (Images).
 - **Members (for subclasses):** `ViewModel`, `Skin`, `Palette`, `virtual Refresh()` (call `base.Refresh()` first), `SetTextColor(TMP_Text, Color)` (tints the text and its underlay/glow; texts with the same tint share one material copy), `ResetTextColor(TMP_Text)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data) subclasses it.
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Section 6](QuickStart.md#quick-start-custom-data) subclasses it.
 
 ### DefaultViewModelFactory / DefaultCardVM **[L]**
 
 The built-in view model factory (asset `CHT_ViewModelFactory`) and the view model it creates. `DefaultCardVM` fills the built-in fields from the `ScriptableCard` and has no custom fields. Replace both when your cards show custom data.
 
 - **Members:** `Create(ScriptableCard)`; `DefaultCardVM.RecomputeAll()`, `SetCapability(key, show)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### DragCard **[C]**
 
@@ -577,14 +577,14 @@ On every card. Drags a hovered card once the pointer moves past a threshold, and
 
 - **Inspector:** **View Root**, **Cam** (defaults to the main camera), **Touch Drag Threshold** and **Mouse Drag Threshold** (pixels), **Tilt Strength**, **Lerp Speed**, **Drag Plane Z**.
 - **Members:** `IsDragging`; static `AnyDragging` and `ActiveDragCount` (the number of cards currently being dragged).
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction); [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play) for what happens on release.
+- **Guide:** [Interaction](#interaction); [Zones & Play](#zones--play) for what happens on release.
 
 ### FanLayout / FanPose **[L]**
 
 The math behind the fan: `FanLayout.ComputeFromProfile` turns a card count, a hand width, a `FanLayoutProfile` and `FanSeatModifiers` into one `FanPose` (local position and rotation) per card. Hands and piles call it; use it yourself for a custom hand view. In `CardHandToolkit.Internal`.
 
 - **Members:** `ComputeFromProfile(count, handSize, profile, mods)`, `FindCurvePositionForX(x, handSize, profile)`; `FanPose.Index`, `LocalPosition`, `LocalRotation`.
-- **Guide:** [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)
+- **Guide:** [Hands & Layout](#hands--layout)
 
 ### FanLayoutProfile **[C]**
 
@@ -592,7 +592,7 @@ The shape of a fan of cards, shared by hands and piles (`CHT_FanLayoutProfile` b
 
 - **Inspector:** **X Curve**, **Y Curve**, **Z Curve**, **Rot Curve** (each read from 0, the leftmost card, to 1, the rightmost), **Max Hand Spread**, **Height Scale**, **Z Amplitude**, **Base Z**, **Rot Degrees Scale**.
 - **Related:** `FanSeatModifiers` (**Spread Mul**), set per hand or pile.
-- **Guide:** [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout), with what each setting controls.
+- **Guide:** [Hands & Layout](#hands--layout), with what each setting controls.
 
 ### FieldToggle **[C]**
 
@@ -600,14 +600,14 @@ On a World View element. Shows or hides it from the Card Skin's enabled fields a
 
 - **Inspector:** **Builtin** (a `CardField`: Title, Art, Card Frame, Rules Text), **Custom Key**, **Invert** (hide when it would show), **Targets** (objects to toggle; empty toggles its own GameObject).
 - **Members:** `Apply(bool shouldShow)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Appendix B](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility) has the full rules.
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Appendix B](QuickStart.md#quick-start-field-visibility) has the full rules.
 
 ### HandStateService **[L]**
 
 The single record of which cards are in each seat's hand (seat `0` is the local player). Hand views follow it and never change hands on their own.
 
 - **Members:** `Instance`, `AddCard(seat, cardRef)`, `RemoveCard(seat, cardRef)`, `Clear(seat)`, `GetHand(seat)`, `OnCardAdded`, `OnCardRemoved`. Removing a card doesn't destroy it: the hand lets go of it, and your code moves, discards or destroys it.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### HandViewBase **[L]**
 
@@ -615,7 +615,7 @@ Base class of `PlayerHand` and `OpponentHand`: a seat id, and the two handlers a
 
 - **Inspector:** **Seat Id** (`0` is the local player).
 - **Members:** `SeatId`, `IsLocalPlayer`; abstract `OnCardAdded(seat, cardRef)` and `OnCardRemoved(seat, cardRef)`, which must ignore other seats.
-- **Guide:** [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)
+- **Guide:** [Hands & Layout](#hands--layout)
 
 ### HoverAnchor **[C]**
 
@@ -623,14 +623,14 @@ A child of the Player Hand whose gizmo (a cyan line) marks where the bottom of a
 
 - **Inspector:** **Reference Card** (a card prefab, used to measure the card's height).
 - **Members:** `GetCardYOffset()` returns half the reference card's view collider height, adjusted for its scale. Used to position the anchor relative to its parent.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### HoverAnchorInfo / AnchorSpace **[L]**
 
 Anchor data returned by `IZoneHoverAnchorProvider` for mouse-hover placement. Both types are in `CardHandToolkit`.
 
 - **Members:** `HoverAnchorInfo.Anchor` (the line's Transform), `Space` (`AnchorSpace.World` or `ZoneLocal`) and `MarginY` (extra clearance in world units). In `ZoneLocal` mode, the solver interprets the anchor's local position relative to the provider's `ZoneRoot`.
-- **Guide:** [IZoneHoverAnchorProvider](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#izonehoveranchorprovider-e); [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hover).
+- **Guide:** [IZoneHoverAnchorProvider](#izonehoveranchorprovider-e); [Interaction](#hover).
 
 ### HoverPolicyRuntime **[C]**
 
@@ -638,14 +638,14 @@ On `CHT_CardToolkitLoader`. Routes out-of-hand hovers to the `HoverPresenter` as
 
 - **Inspector:** **Policy** (a `HoverRoutingPolicy`), **Presenter Prefab** (used when the scene has no `HoverPresenter`).
 - **Members:** `Instance`, `ForceHideAll()`, static `IsPointerOverUI(pointerId)`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### HoverPoseSolver **[L]**
 
 Internal mouse-hover placement helper in `CardHandToolkit.Internal`. The Player Hand uses the zone's anchor and the card's footprint to find a local Y where the card's bottom rests on the anchor line.
 
 - **Members:** `TryBottomToAnchorY(CardBehaviour card, IZoneHoverAnchorProvider zoneAnchor, ICardFootprint footprint, out float targetLocalY)` returns `false` when required data is missing; the caller chooses a fallback. `ICardFootprint`, also internal, supplies `TryGetBottomOffsetWorld(out float)`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hover); [IZoneHoverAnchorProvider](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#izonehoveranchorprovider-e).
+- **Guide:** [Interaction](#hover); [IZoneHoverAnchorProvider](#izonehoveranchorprovider-e).
 
 ### HoverPresenter / IHoverPresenter **[C]/[E]**
 
@@ -653,56 +653,56 @@ Internal mouse-hover placement helper in `CardHandToolkit.Internal`. The Player 
 
 - **Inspector:** **Card Panel Root** (where the card's World View is placed), **Backdrop**. The preview's size comes from the Card Skin's **Overlay Scale**.
 - **Members:** `ShowPreview(card, isMouse)`, `HidePreview(card)`. `IHoverPresenter` also has static helpers for deciding which fields to show: `BuildVisibleCustomKeys` and `ToggleAllFieldsBasedOnData`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction); [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals) for the preview's layout.
+- **Guide:** [Interaction](#interaction); [Card Visuals](#card-visuals) for the preview's layout.
 
 ### HoverProfile **[C]**
 
 Hover timings and feel, assigned on `CardToolkitRuntime` (the Setup Wizard creates one).
 
 - **Inspector:** Mouse: **Mouse Hover Timeout**, **Mouse Out Of Hand Hover Delay**, **Anchor Margin Y**, **Overlay Mouse Offset**. Touch: **Touch Long Press Delay**, **Touch Long Press Move Threshold**, **Touch Hover Height**, **Overlay Touch Edge Margin**. Animation: **Hover Scale**, **Hover Anim Time**, **Hover Z Offset**. Colors: **Default Highlight Color**, **Selected Highlight Color**.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### HoverRoutingPolicy **[C]**
 
 Rules for out-of-hand previews, assigned on `HoverPolicyRuntime` (`CHT_HoverRoutingPolicy` by default; **Create ▸ Card Toolkit ▸ Config ▸ Hover Routing Policy** for your own).
 
 - **Inspector:** **Exclusive Preview**, **Suppress When Pointer Over UI**, **Allow Face Down Preview**, **Suppress Out Of Hand When In Hand**, **Last Enter Wins**.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### ICardView **[E]**
 
 Anything under a card that reacts to its sprites and state. `CardBehaviour` finds every `ICardView` under the card when it's created, sends them the frame, art and back, and calls `Refresh(state)` whenever a state flag changes. `Card3DView` and `CardPoseView` implement it; implement it yourself to react to state, for example to dim disabled cards.
 
 - **Members:** `SetCardBackSprite(Sprite)`, `SetFrameSprite(Sprite)`, `SetFrameSpriteByFrameKey(string)`, `SetArtSprite(Sprite)`, `Refresh(CardStateFlags state)`. Leave the sprite methods empty if you don't need them.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### ICardViewBinder **[E]**
 
 Writes a view model's data into a World View's UI. It only sets data; field toggles decide what shows. Start from `DefaultCardViewBinder` rather than implementing this directly.
 
 - **Members:** `Bind(ICardViewModel, CardSkin)`, called by `CardPresenter` and `HoverPresenter` with the skin the view was built from. Subscribe to the view model's `OnChanged` there.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data).
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Section 6](QuickStart.md#quick-start-custom-data).
 
 ### ICardViewModel **[E]**
 
 The data a card displays, created per card by the view model factory. Implement it for custom data or runtime state (a cost that changes, counters, buffs).
 
 - **Members:** `Title`, `RulesText`, `ArtSprite`, `CardFrameSprite`, `Capabilities` (custom field keys this card has), `OnChanged`, `Initialize(ScriptableCard)`, `SetCapability(key, show)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data) builds `Sample_CardVM`.
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Section 6](QuickStart.md#quick-start-custom-data) builds `Sample_CardVM`.
 
 ### ICardViewModelFactory **[E]**
 
 Creates the `ICardViewModel` for each card. Implement it on a `ScriptableObject`, create an asset, and assign it to your Visual Factory's **View Model Factory SO**.
 
 - **Members:** `ICardViewModel Create(ScriptableCard def)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals); [Quick Start Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data).
+- **Guide:** [Card Visuals](#card-visuals); [Quick Start Section 6](QuickStart.md#quick-start-custom-data).
 
 ### ICardVisualFactory **[E]**
 
 Builds a card from a `CardRef`. `CardVisualFactorySO` is the built-in one; to replace it, implement this on a `ScriptableObject` and assign it to **Visual Factory** on `CardToolkitRuntime`. Hands and piles call it for cards that aren't in the scene yet.
 
 - **Members:** `CardBehaviour Build(CardRef cr, Transform spawnAt, bool knownToLocal = true)`.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 ### ICardZone **[E]**
 
@@ -710,14 +710,14 @@ Anything that holds and lays out cards: hands, board zones, and deck and discard
 
 - **Members:** `ZoneRoot` (the parent for the zone's cards), `Type`, `SeatId` (`-1` for shared zones), `IsFocused` and `IsTransitioning` (cards can only be hovered or tapped while their zone is focused and not moving; only the Player Hand changes these), `AddCard(card, insertAt = -1)`, `RemoveCard(card)`, `AlignCards()`.
 - **Related:** `ZoneType` (`Hand`, `Board`, `Deck`, `Discard`, `OpponentHand`, `SpecialArea1` and `SpecialArea2` for your own zones, `Unknown`) and `ZoneCardFacing` (`FaceUp`, `FaceDown`, `KeepCurrent`). Extension methods `ScreenPointToLocal` and `TryProjectScreenPoint` map a screen point onto the zone.
-- **Guide:** [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)
+- **Guide:** [Zones & Play](#zones--play)
 
 ### IContextualSwitcher **[E]**
 
 Lets a component in the World View look different on cards in the scene and in the hover overlay, which reuse the same prefab. Both use the same 1000×1400 layout, so you only need this for deliberate differences (font sizes, spacing, visibility).
 
 - **Members:** `ApplyWorld()`, called by `CardPresenter` when it builds a card's view, and `ApplyOverlay()`, called by `HoverPresenter` when it shows the preview. Both are called on every implementer in the view, including inactive objects.
-- **Guide:** [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)
+- **Guide:** [Card Visuals](#card-visuals)
 
 An icon that only appears in the overlay:
 
@@ -734,7 +734,7 @@ public sealed class OverlayOnlyIcon : MonoBehaviour, IContextualSwitcher
 Decides what a `Deck` does when you draw from an empty draw pile. `ReshuffleOnEmpty` (the default) shuffles the discard pile back in; `NoReshufflePolicy` doesn't. Implement `IEmptyDeckPolicy` for your own rule.
 
 - **Members:** `bool TryResolveEmpty(Deck<TId> deck)`: return `true` once the draw pile has cards again.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### IInteractionOverride / CardInteractionOverride **[C]/[E]**
 
@@ -742,21 +742,21 @@ Changes one card's permissions after the policy has decided. Add a `CardInteract
 
 - **Inspector:** **Allow**, **Deny** (each an `InteractionPerms` mask).
 - **Members:** `AllowMask`, `DenyMask`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### IInteractionPolicy **[E]**
 
 Decides what the player may do with a card (`InteractionPerms`: `Hover`, `Drag`, `Select`, `Target`) given its `InteractionContext` (`Zone` and `Owner`). Replace the global policy with a `ScriptableObject` that implements it, assigned to **Override Policy Asset** on `CardToolkitRuntime`. A zone can supply its own by implementing `IInteractionPolicyProvider` (`Policy`) on the zone or a component next to it.
 
 - **Members:** `InteractionPerms GetPermissions(CardBehaviour card, InteractionContext ctx)`.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction), including a turn-based example.
+- **Guide:** [Interaction](#interaction), including a turn-based example.
 
 ### InteractionController **[L]**
 
 On every card. Asks the zone's policy (or the global one) what the card allows, applies any `IInteractionOverride`, then switches `CardHoverable`, `DragCard` and `CardTap` on or off. It asks again whenever the card changes zone.
 
 - **Members:** `Permissions`, `Refresh()`; static `RefreshAll()`, to call when game state your policy reads (a turn, a phase) changes.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### IPlayHeightZone / IReorderBandZone / ILockableZone **[E]**
 
@@ -765,21 +765,21 @@ Optional zone capabilities, used by `DragCard` on the zone a card is dragged fro
 - **`IPlayHeightZone`:** `IsAbovePlayHeight(localPos)` says whether a dragged card is high enough to play. `PlayerHand` uses its **Play Height** (default `1.5`).
 - **`IReorderBandZone`:** lets cards be reordered by dragging them along a band over the zone: `IsLocalPointInReorderBand`, `CalcInsertIndexFromLocal`, `MoveCardInHand`. `PlayerHand` implements it.
 - **`ILockableZone`:** `Lock()`, `Unlock()`, `IsLocked`, `OnLockChanged`. A locked zone rejects plays; the example zones show it as a **Locked** checkbox.
-- **Guide:** [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)
+- **Guide:** [Zones & Play](#zones--play)
 
 ### IPlayResolver **[E]**
 
 Decides whether to accept a card the player plays. Every active resolver is asked in `Priority` order (lowest first) until one accepts. The one that accepts moves the card.
 
 - **Members:** `Priority`, `PlacementResult TryResolvePlay(PlacementQuery query)`. The query holds `card`, `fromZone`, `screenPos` and `pointerRay`, with helpers `TryGetLocalPoint(target, out local)` and `IsOver(target, size)`; the toolkit only reads the result's `allowed`.
-- **Guide:** [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play), including a short example resolver.
+- **Guide:** [Zones & Play](#zones--play), including a short example resolver.
 
 ### IZoneHoverAnchorProvider **[E]**
 
 Supplies the line a mouse-hovered card's bottom edge rests on. Implement it alongside a custom hand or zone that uses anchored hover placement; `PlayerHand` already does. Providing the anchor alone doesn't animate cards: your layout code calls the solver and applies the result.
 
 - **Members:** `Transform ZoneRoot`, `bool TryGetHoverAnchor(out HoverAnchorInfo info)`. Return `false` when no anchor is available. `PlayerHand` uses a world-space anchor and the Hover Profile's **Anchor Margin Y**.
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hover); [HoverPoseSolver](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hoverposesolver-l) for the placement helper.
+- **Guide:** [Interaction](#hover); [HoverPoseSolver](#hoverposesolver-l) for the placement helper.
 
 ### LineBoardZone _(example)_ **[C]**
 
@@ -787,7 +787,7 @@ A board zone that lays cards out in a centered row. Use it as is or as a startin
 
 - **Inspector:** **Capacity** (default 40), **Priority** (default 1), **Drop Area** (`(0, 0)` accepts plays anywhere), **Spacing**, **Max Width** (spacing squeezes to fit; `0` turns this off), **Z Lift Per Index**, **Card Facing**, **Locked**.
 - **Members:** `Cards` (left to right), `Count`, `Capacity`, `SeatId` (settable), plus `ICardZone`, `IPlayResolver` and `ILockableZone` (`SetLocked(bool)` too).
-- **Guide:** [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)
+- **Guide:** [Zones & Play](#zones--play)
 
 ### OpponentHand **[C]**
 
@@ -795,7 +795,7 @@ An opponent's hand (prefab `CHT_OpponentHand`): shows the cards `HandStateServic
 
 - **Inspector:** **Seat Id** (`1` and up), **Fan Layout**, **Seat Modifier** (spread, `0.85` by default), **Pos Lerp Speed**, **Rot Lerp Speed**, and the stop thresholds for the animation.
 - **Members:** `AddCard`, `RemoveCard`, `AlignCards` (from `ICardZone`).
-- **Guide:** [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)
+- **Guide:** [Hands & Layout](#hands--layout)
 
 ### PlayerHand **[C]**
 
@@ -803,21 +803,21 @@ The local player's hand (prefab `CHT_PlayerHand`; the Setup Wizard always adds o
 
 - **Inspector:** **Seat Id** (`0`), **Fan Layout**, **Seat Modifier**, **Focus Position** and **Unfocus Position** (transforms), **Hover Anchor**, **Hand Transition Speed**, **Cam**, **Play Height** (default `1.5`), **Band Height**, **Band Depth**, **Min Band Width** (the reorder band).
 - **Members:** `Count`, `IsFocused`, `FocusHand()`, `UnfocusHand()`, `MoveCardInHand(card, index)`, `FindCardBySlug(slug)`, plus `ICardZone`, `IPlayHeightZone` and `IReorderBandZone`.
-- **Guide:** [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout); [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction) for hover.
+- **Guide:** [Hands & Layout](#hands--layout); [Interaction](#interaction) for hover.
 
 ### PointerService / IPointerSource **[L]/[E]**
 
 The single pointer every card component reads. `PointerService` polls one `IPointerSource` per frame: the Input System source when that package is installed and active, otherwise the legacy Input Manager source. Touch takes priority over the mouse. Both types are in `CardHandToolkit.Internal`.
 
 - **Members:** `PointerService.TryGet(out Pointer p)`, `SetSource(IPointerSource)`, `LastPointerWasMouse`. `IPointerSource.TryGetPointer(out Pointer p)` returns at most one pointer (`id` is `-1` for the mouse, `screenPos`, `phase`: `Down`, `Hold`, `Up`).
-- **Guide:** [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)
+- **Guide:** [Interaction](#interaction)
 
 ### SceneCardLookup **[L]**
 
 Finds the card in the scene for a `CardRef`. Every card registers itself when it's built and unregisters when destroyed, so hands and piles reuse existing cards instead of building duplicates.
 
 - **Members:** `TryGet(instanceId, out CardBehaviour card)`, `GetAllCards()`.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### ScriptableCard **[C]**
 
@@ -825,7 +825,7 @@ One card design (**Create ▸ Card Toolkit ▸ Card**). Copies in play are `Card
 
 - **Inspector:** **Slug** (unique id, filled in from the asset name on creation; keep it stable once released), **Card Name**, **Rules Text**, **Frame Key** (empty uses the Default Frame), **Tags**, **Card Art**, **Addons** (**+ Add New Addon**).
 - **Members:** the fields above, `Guid` (generated automatically), `GetAddon<T>()`.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ### SingleSlotZone _(example)_ **[C]**
 
@@ -833,7 +833,7 @@ A board zone that holds one card. Use it as is or as a starting point for your o
 
 - **Inspector:** **Slot** (optional; defaults to the zone's own transform), **Allow Replace When Occupied** (the old card returns to its home hand), **Priority** (default 1), **Drop Area** (centered on the Slot; `(0, 0)` accepts plays anywhere), **Card Facing**, **Locked**.
 - **Members:** `Card` (the card in the slot, or `null`), `Count`, `SeatId` (settable), plus `ICardZone`, `IPlayResolver` and `ILockableZone` (`SetLocked(bool)` too).
-- **Guide:** [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)
+- **Guide:** [Zones & Play](#zones--play)
 
 ### VisualDeck / VisualDiscard **[C]**
 
@@ -841,14 +841,14 @@ Show a `Deck`'s draw pile (face down) and discard pile (face up) as stacks of ca
 
 - **Inspector:** **Fan Layout** (a `FanLayoutProfile` for the stack), **Spread Modifier** (how tight the stack is), **Max Visible Layers** (default `8`, minimum `1`), and animation speeds.
 - **Members:** `Initialize(Deck<CardRef> deck)` binds the view to a deck.
-- **Guide:** [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)
+- **Guide:** [Card Data & Decks](#card-data--decks)
 
 ---
 
 ## FAQ
 
-Common questions and troubleshooting are in the [FAQ](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/faq.html).
+Common questions and troubleshooting are in the [FAQ](FAQ.md).
 
 ---
 
-> **Next:** New to the toolkit? Start with the [Quick Start](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html). Otherwise jump to a module: [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction) • [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play) • [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks) • [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals) • [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)
+> **Next:** New to the toolkit? Start with the [Quick Start](QuickStart.md). Otherwise jump to a module: [Interaction](#interaction) • [Zones & Play](#zones--play) • [Card Data & Decks](#card-data--decks) • [Card Visuals](#card-visuals) • [Hands & Layout](#hands--layout)

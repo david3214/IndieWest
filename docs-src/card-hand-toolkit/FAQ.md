@@ -1,11 +1,11 @@
 # Card Hand Toolkit — FAQ
 
-New to the toolkit? Start with the [Quick Start](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html). For every class and interface, see the [API Reference](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html).
+New to the toolkit? Start with the [Quick Start](QuickStart.md). For every class and interface, see the [API Reference](API.md).
 
 ## Getting started
 
 **Q: Which sections should I read first?**
-A: After the [Quick Start](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html), read the [Concepts](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts) in the API Reference, then the module guide for what you're building: [Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play) for where cards go, [Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks) for drawing and dealing, [Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals) for how cards look, [Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction) for hover, drag and tap, and [Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout) for the hands themselves.
+A: After the [Quick Start](QuickStart.md), read the [Concepts](API.md#concepts) in the API Reference, then the module guide for what you're building: [Zones & Play](API.md#zones--play) for where cards go, [Card Data & Decks](API.md#card-data--decks) for drawing and dealing, [Card Visuals](API.md#card-visuals) for how cards look, [Interaction](API.md#interaction) for hover, drag and tap, and [Hands & Layout](API.md#hands--layout) for the hands themselves.
 
 **Q: What’s safe to modify?**
 A: Anything tagged **[C]** in the API Reference is intended for configuration. Types tagged **[E]** are designed for extension via interfaces/policies. Types tagged **[L]** are primarily informational.
@@ -22,24 +22,24 @@ A: No. They're examples of play zones. Use them as they are, or write your own b
 ## Interaction and decks
 
 **Q: How do I change what a card allows: hover, drag, select or target?**
-A: Supply an `IInteractionPolicy` globally through **Override Policy Asset** on `CardToolkitRuntime`, or per zone through `IInteractionPolicyProvider`. Add `CardInteractionOverride` for individual cards. After changing game state that your policy reads, call `InteractionController.RefreshAll()` (or `Refresh()` for one card). See [Permissions and policies](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#permissions-and-policies).
+A: Supply an `IInteractionPolicy` globally through **Override Policy Asset** on `CardToolkitRuntime`, or per zone through `IInteractionPolicyProvider`. Add `CardInteractionOverride` for individual cards. After changing game state that your policy reads, call `InteractionController.RefreshAll()` (or `Refresh()` for one card). See [Permissions and policies](API.md#permissions-and-policies).
 
 **Q: Can I block dragging on one specific card?**
-A: Add **Card Interaction Override** to that card and tick **Drag** in **Deny**. Deny wins over Allow. If you change the masks at runtime, call `Refresh()` on that card's `InteractionController`. See [IInteractionOverride / CardInteractionOverride](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#iinteractionoverride--cardinteractionoverride-ce).
+A: Add **Card Interaction Override** to that card and tick **Drag** in **Deny**. Deny wins over Allow. If you change the masks at runtime, call `Refresh()` on that card's `InteractionController`. See [IInteractionOverride / CardInteractionOverride](API.md#iinteractionoverride--cardinteractionoverride-ce).
 
 **Q: What happens when the deck is empty?**
-A: `Draw()` asks the deck's `IEmptyDeckPolicy` to refill it. The default `ReshuffleOnEmpty` shuffles the discard pile back in; `NoReshufflePolicy` leaves it empty. If the policy can't refill it, `EmptyEvent` fires and `Draw()` returns only the cards it could draw, possibly none. See [Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#decks).
+A: `Draw()` asks the deck's `IEmptyDeckPolicy` to refill it. The default `ReshuffleOnEmpty` shuffles the discard pile back in; `NoReshufflePolicy` leaves it empty. If the policy can't refill it, `EmptyEvent` fires and `Draw()` returns only the cards it could draw, possibly none. See [Decks](API.md#decks).
 
 **Q: Can players reorder cards in their hand by dragging?**
-A: Yes. Release inside the Player Hand's reorder band to move a card to that position. For a custom hand, implement `IReorderBandZone`; `DragCard` uses it to compute the insert index. See [The Player Hand](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#the-player-hand).
+A: Yes. Release inside the Player Hand's reorder band to move a card to that position. For a custom hand, implement `IReorderBandZone`; `DragCard` uses it to compute the insert index. See [The Player Hand](API.md#the-player-hand).
 
 **Q: How does hover differ between mouse and touch?**
-A: In a focused hand, mouse-over or holding a finger on a card lifts it. Out of the hand, the mouse opens a preview after a short delay; touch opens it after a long press, and tapping the backdrop closes it. Tune timings and placement on the **Hover Profile**, assigned on `CardToolkitRuntime`. See [Hover](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hover).
+A: In a focused hand, mouse-over or holding a finger on a card lifts it. Out of the hand, the mouse opens a preview after a short delay; touch opens it after a long press, and tapping the backdrop closes it. Tune timings and placement on the **Hover Profile**, assigned on `CardToolkitRuntime`. See [Hover](API.md#hover).
 
 ## Troubleshooting
 
 **Q: Why does mouse hover flicker near the bottom of the screen?**
-A: Check the Player Hand's **Hover Anchor**: its cyan gizmo line should be at or below the bottom edge of the screen, so a lifted card doesn't expose the next card under the pointer. Check its **Reference Card** if you've changed the card prefab's collider or scale. See [HoverAnchor](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hoveranchor-c).
+A: Check the Player Hand's **Hover Anchor**: its cyan gizmo line should be at or below the bottom edge of the screen, so a lifted card doesn't expose the next card under the pointer. Check its **Reference Card** if you've changed the card prefab's collider or scale. See [HoverAnchor](API.md#hoveranchor-c).
 
 **Q: I pressed Play and got "No CardToolkitRuntime found in scene".**
 A: The scene you pressed Play from has no `CHT_CardToolkitLoader`. The Setup Wizard puts one in your Game scene. For any other scene with cards, copy the loader from your Game scene into it.

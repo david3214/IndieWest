@@ -1,10 +1,10 @@
 {
   "source": "../../My games/Card Game Template/Assets/CardHandToolkit/Documentation",
-  "importedAt": "2026-10-21T15:51:38.558Z",
+  "importedAt": "2026-10-21T16:30:20.888Z",
   "files": {
-    "API.md": "7d99d181a8df89db8c9dd3bd2772dea788b70682bcb31f11a4cdca7386255693",
+    "API.md": "dd75c7bbf830ca3fb2e7d333ffa8cc5abe408c7bb5a85317316f48bff938f418",
     "CHANGELOG.md": "0df2f6f93be90875f7f9178efd59a847b5ae08efd189b0efd2c29ba2233ecac4",
-    "FAQ.md": "ef10ef0159260940d5ad52e71d0411b7c5ba72948b72780f9e801c5ef36f2877",
+    "FAQ.md": "ab5485878e6d7d96e568c6c851f0edafa02b91d81fb18513c14e89806cd1d672",
     "Images/CardDataFlow.png": "c184b54566ee0cc313bded98748078fb324f45b3ecd1e2e117d3bc2d91a61894",
     "Images/CardDataFlow.svg": "f8ef039187292c801d9126e5f3859d904e9115f6aa987774e13719add354af9f",
     "Images/CardLifecycle.png": "f69ceb615ada9716bd15983abc68aa26fd09b6a1abcc1e3045f77a4f8f2f6958",
@@ -25,7 +25,7 @@
     "Images/UnityCardAnchoring.png": "987112d3a33b5550786451a2cb5a92b5286651f10b3e572326814a25263eb87f",
     "Images/WorldViewAnchoring_Template.png": "c8f1f8c956914d319ae68cb27763ad108c1452085589baf8a4fc36a100f13607",
     "LICENSE.md": "ef517936129f57b1be8409363127fbe67610ef53e70f750442dbce24cdd2fe95",
-    "QuickStart.md": "3e5dc82e5674afacff77f82419ef57d1f9ae2cceb4c64dfa964a4e5e03e72b0b",
-    "README.md": "38a0371d01759a8126b8f1f633e2655bb3b934d8bbd79768aeb1fa9b29426368"
+    "QuickStart.md": "1fa109560895ee1c32d5f20073722d2c48fe56780a6c75071dec0e25f2cd8b07",
+    "README.md": "955cb589609524d6b27b41d78458c2ddcf71dd84c20d283bf256722fc0050e02"
   }
 }

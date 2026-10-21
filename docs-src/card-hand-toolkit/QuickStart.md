@@ -1,14 +1,14 @@
 ## Table of Contents
 
-- [Getting Started & Install](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-install)
-- [Run the Setup Wizard](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-wizard)
-- [Create Your CardPlayable Variant](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-create-cardplayable)
-- [Make It Play (Drawing a Card)](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-make-it-play)
-- [Make Cards Look Like Yours (No Code)](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-visual-customization)
-- [Add Your Own Card Data (Cost and Suit)](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data)
-- [Next Steps](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-next-steps)
-- [Appendix A: Card Art](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art)
-- [Appendix B: How Fields Show and Hide](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility)
+- [Getting Started & Install](#quick-start-install)
+- [Run the Setup Wizard](#quick-start-wizard)
+- [Create Your CardPlayable Variant](#quick-start-create-cardplayable)
+- [Make It Play (Drawing a Card)](#quick-start-make-it-play)
+- [Make Cards Look Like Yours (No Code)](#quick-start-visual-customization)
+- [Add Your Own Card Data (Cost and Suit)](#quick-start-custom-data)
+- [Next Steps](#quick-start-next-steps)
+- [Appendix A: Card Art](#quick-start-art)
+- [Appendix B: How Fields Show and Hide](#quick-start-field-visibility)
 
 <a id="quick-start-install"></a>
 
@@ -72,7 +72,7 @@ The Wizard saves your scene with `CHT_CardToolkitLoader` (wired to your new asse
 
 > **More scenes:** Every scene with cards needs a `CHT_CardToolkitLoader`. To add one to another scene, open both scenes, then copy the loader from your Game scene's Hierarchy and paste it into the other one. When you switch scenes at runtime, the first loader persists and later ones remove themselves.
 
-> **Errors when you press Play?** See [Troubleshooting](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/faq.html#troubleshooting) in the FAQ.
+> **Errors when you press Play?** See [Troubleshooting](FAQ.md#troubleshooting) in the FAQ.
 
 <a id="quick-start-create-cardplayable"></a>
 
@@ -86,17 +86,17 @@ After finishing the Wizard, you now have these assets:
 
 | Asset                            | Purpose                                                                                                                    | Default Location                 |
 | -------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------- |
-| **CardPlayable_User.prefab**     | Variant of `CHT_CardPlayable_Template`, used for all cards in-game. Customize its interaction feel or swap its 3D model.   | `Assets/CardHandToolkit/Config/` |
+| **[CardPlayable_User.prefab](API.md#the-components-on-a-card)**     | Variant of `CHT_CardPlayable_Template`, used for all cards in-game. Customize its interaction feel or swap its 3D model.   | `Assets/CardHandToolkit/Config/` |
 | **CardBackMat_User.mat**         | Material for the back of cards. Its texture only shows in the editor; at runtime the back comes from the CardFrameLibrary. | `Assets/CardHandToolkit/Config/` |
 | **CardFrontMat_User.mat**        | Material for the front of cards. Its textures only show in the editor; at runtime the frame and art are replaced.          | `Assets/CardHandToolkit/Config/` |
-| **WorldViewPrefab_User.prefab**  | Variant of `CHT_WorldViewPrefab_Template`. Runtime display shown on cards (name, rules text, art).                         | `Assets/CardHandToolkit/Config/` |
-| **CardSkin_User.asset**          | Copy of the template Card Skin. Sets the World View prefab, which fields show, scaling and colors.                         | `Assets/CardHandToolkit/Config/` |
-| **CardDatabase.asset**           | Empty Card Database scriptable Object. Put all Scriptable Cards in here for the loader to build your library               | `Assets/CardHandToolkit/Config/` |
-| **CardFrameLibrary.asset**       | Card Frame Library. Starts with a placeholder frame and back; replace them with your own. Plain white if a slot is empty.  | `Assets/CardHandToolkit/Config/` |
-| **HoverProfile.asset**           | Hover timings and offsets for mouse and touch.                                                                             | `Assets/CardHandToolkit/Config/` |
-| **CardVisualFactory_User.asset** | Copy of the template Visual Factory. Initializes cards at runtime and holds the global Card Skin + Card Prefab references. | `Assets/CardHandToolkit/Config/` |
+| **[WorldViewPrefab_User.prefab](API.md#two-layers-the-mesh-and-the-world-view)**  | Variant of `CHT_WorldViewPrefab_Template`. Runtime display shown on cards (name, rules text, art).                         | `Assets/CardHandToolkit/Config/` |
+| **[CardSkin_User.asset](API.md#cardskin-c)**          | Copy of the template Card Skin. Sets the World View prefab, which fields show, scaling and colors.                         | `Assets/CardHandToolkit/Config/` |
+| **[CardDatabase.asset](API.md#carddatabase-c)**           | Empty Card Database scriptable Object. Put all Scriptable Cards in here for the loader to build your library               | `Assets/CardHandToolkit/Config/` |
+| **[CardFrameLibrary.asset](API.md#cardframelibrary-c)**       | Card Frame Library. Starts with a placeholder frame and back; replace them with your own. Plain white if a slot is empty.  | `Assets/CardHandToolkit/Config/` |
+| **[HoverProfile.asset](API.md#hoverprofile-c)**           | Hover timings and offsets for mouse and touch.                                                                             | `Assets/CardHandToolkit/Config/` |
+| **[CardVisualFactory_User.asset](API.md#cardvisualfactoryso-c)** | Copy of the template Visual Factory. Initializes cards at runtime and holds the global Card Skin + Card Prefab references. | `Assets/CardHandToolkit/Config/` |
 
-The **CHT_CardToolkitLoader** in your Game scene now references this Visual Factory, so every card spawned at runtime will use your customized skin and prefab.
+The **[CHT_CardToolkitLoader](API.md#cardtoolkitruntime-c)** in your Game scene now references this Visual Factory, so every card spawned at runtime will use your customized skin and prefab.
 
 ## 2) Create ScriptableCards (your card data)
 
@@ -106,10 +106,10 @@ The **CHT_CardToolkitLoader** in your Game scene now references this Visual Fact
    - **Card Name**
    - **Rules Text**
    - **Frame Key** (optional; leave empty to use the default frame)
-   - **Card Art** (sprite). This is the card's illustration only, not the whole card. The frame, back and text are set up separately. **Section 5** covers how art, frames and text fit together, and [Appendix A](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) covers how to prepare your art.
+   - **Card Art** (sprite). This is the card's illustration only, not the whole card. The frame, back and text are set up separately. **Section 5** covers how art, frames and text fit together, and [Appendix A](#quick-start-art) covers how to prepare your art.
    - Any custom data fields your ViewModel reads create as an Addon that will be a part of the addon list on the ScriptableCard. (We'll cover this in a later section)
 
-> Each `ScriptableCard` represents gameplay data only; visuals are handled by the worldViewPrefab + global skin at runtime.
+> Each [`ScriptableCard`](API.md#scriptablecard-c) represents gameplay data only; visuals are handled by the worldViewPrefab + global skin at runtime.
 
 ## 3) Add your ScriptableCards to the Card Database
 
@@ -124,12 +124,12 @@ This makes them discoverable to factories and draw systems.
 
 Open **`CardPlayable_User.prefab`** to tune your game’s “feel”:
 
-- **DragCard** – smoothing (Lerp Speed), drag plane depth, mouse/touch drag thresholds, tilt
-- **CardBehaviour** – leave **Definition** empty (runtime assigns it)
+- **[DragCard](API.md#dragcard-c)** – smoothing (Lerp Speed), drag plane depth, mouse/touch drag thresholds, tilt
+- **[CardBehaviour](API.md#cardbehaviour-l)** – leave **Definition** empty (runtime assigns it)
 
 > These tweaks affect **every** card instance since all cards use this single prefab. Hover timing (hover timeout, long-press delay, hover scale) lives in **HoverProfile**, not on the prefab.
 >
-> The shape of the hand's fan (spread, arc, card rotation) lives in a **Fan Layout Profile**. The Player Hand uses the shipped `CHT_FanLayoutProfile`. To change it, create your own from **Create ▸ Card Toolkit ▸ Config ▸ Fan Layout Profile** and assign it to the **Fan Layout** field on the **Player Hand** in your Game scene.
+> The shape of the hand's fan (spread, arc, card rotation) lives in a **[Fan Layout Profile](API.md#fanlayoutprofile-c)**. The Player Hand uses the shipped `CHT_FanLayoutProfile`. To change it, create your own from **Create ▸ Card Toolkit ▸ Config ▸ Fan Layout Profile** and assign it to the **Fan Layout** field on the **Player Hand** in your Game scene.
 
 Then try it out:
 
@@ -139,7 +139,7 @@ Then try it out:
 
 > **Expected warning:** A card placed by hand has no card data yet, so you'll see `CardBehaviour: No definition set for card …, cannot push textures to views.` in the Console. That's normal for this test — cards drawn at runtime (Section 4) get their definition automatically.
 
-For deeper visual customization (changing frame style, world-view prefab, etc.), see **Section 5** and the [API Reference](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html).
+For deeper visual customization (changing frame style, world-view prefab, etc.), see **Section 5** and the [API Reference](API.md).
 
 ---
 
@@ -153,13 +153,13 @@ For deeper visual customization (changing frame style, world-view prefab, etc.),
 
 ## 1) How drawing works
 
-At runtime, cards are added to hands through the **`HandStateService`**.
+At runtime, cards are added to hands through the **[`HandStateService`](API.md#handstateservice-l)**.
 
 ```csharp
 HandStateService.Instance.AddCard(int seat, CardRef cardRef);
 ```
 
-A `CardRef` pairs a card's **slug** (which `ScriptableCard` it is) with a unique **instance id** (which copy it is), so two copies of the same card can be in play at once.
+A [`CardRef`](API.md#cardref-l) pairs a card's **slug** (which `ScriptableCard` it is) with a unique **instance id** (which copy it is), so two copies of the same card can be in play at once.
 
 When you call this:
 
@@ -182,7 +182,7 @@ If you don’t already have one, create a deck:
 1. **Create ▸ Card Toolkit ▸ Deck List**
 2. In the Inspector, add your cards to the list (ScriptableCards). Each entry is one physical card, so a list with one entry is a one-card deck. For testing, add your sample card several times (10 or more is a good start) so you can see a full hand fan out. Each copy gets its own instance id when the deck is built, so duplicates are fine.
 
-> **Note:** The `DeckList` asset is a simple list of cards. The `Deck` class manages state (draw, discard, shuffle). Keep the `Deck` you get from `ToSlugDeck()` and draw from it for the rest of the game — calling `ToSlugDeck()` again starts a fresh deck. You choose what happens when the deck runs out by passing a policy to `ToSlugDeck()`, such as `ReshuffleOnEmpty` or `NoReshufflePolicy`.
+> **Note:** The [`DeckList`](API.md#decklist-c) asset is a simple list of cards. The [`Deck`](API.md#deck-l) class manages state (draw, discard, shuffle). Keep the `Deck` you get from `ToSlugDeck()` and draw from it for the rest of the game — calling `ToSlugDeck()` again starts a fresh deck. You choose what happens when the deck runs out by passing a policy to `ToSlugDeck()`, such as [`ReshuffleOnEmpty` or `NoReshufflePolicy`](API.md#iemptydeckpolicy--reshuffleonempty--noreshufflepolicy-ec).
 
 ## 3) Auto-draw on Start
 
@@ -193,7 +193,7 @@ The toolkit includes a helper script for this, `Samples/Scripts/Sample_DrawOnSta
 3. Drag the Deck List you created in step 2 into the component's **Deck List** field.
 4. (Optional) Drag `Runtime/Prefabs/CHT_DeckVisual` into your Game scene and place it beside the hand. Then drag the **CHT_DeckVisual** object from the **Hierarchy** (not the prefab from the Project window) into the component's **Visual Deck** field. The deck then shows as a pile, and drawn cards fly from it into the hand.
 
-On the scene's **Visual Deck** component, **Max Visible Layers** defaults to `8`. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. `VisualDiscard` uses the same setting. Select either pile to preview its visible layers in the gizmo.
+On the scene's **[Visual Deck](API.md#visualdeck--visualdiscard-c)** component, **Max Visible Layers** defaults to `8`. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. `VisualDiscard` uses the same setting. Select either pile to preview its visible layers in the gizmo.
 
 Here's what it does:
 
@@ -255,17 +255,17 @@ Press **Play**. After a short pause, you’ll see cards drawn one by one into th
 > - **Text:** the card's name and rules text, drawn by the **World View Prefab**.
 > - **Back:** the card back, from the **CardFrameLibrary**. The Wizard's library starts with a placeholder back.
 >
-> **Section 5** shows how to replace the placeholders with your own frame, back and layout. [Appendix A](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) covers preparing your art.
+> **Section 5** shows how to replace the placeholders with your own frame, back and layout. [Appendix A](#quick-start-art) covers preparing your art.
 
 ## 4) Play a card
 
 When you drag a card above the **Play Height** line, it triggers the card’s “play” action.
 
-- Cards check every active **IPlayResolver** in the scene, lowest **Priority** first. The toolkit ships two: `LineBoardZone` and `SingleSlotZone`.
+- Cards check every active **[IPlayResolver](API.md#iplayresolver-e)** in the scene, lowest **Priority** first. The toolkit ships two: [`LineBoardZone`](API.md#lineboardzone-example-c) and [`SingleSlotZone`](API.md#singleslotzone-example-c).
 - The first one whose `TryResolvePlay` accepts the card takes it, and the card moves to that zone.
 - If none accepts it, the card returns to the hand.
 
-> **Play Height** is set on the **Player Hand** (default `1.5`) and works the same for mouse and touch. Select the Player Hand to see it as a red gizmo line in the Scene view. The Player Hand's **Hover Anchor** object has its own gizmo, marking where hovered cards rest. Keep it at or below the bottom edge of the screen to avoid flicker.
+> **Play Height** is set on the **Player Hand** (default `1.5`) and works the same for mouse and touch. Select the Player Hand to see it as a red gizmo line in the Scene view. The Player Hand's **[Hover Anchor](API.md#hoveranchor-c)** object has its own gizmo, marking where hovered cards rest. Keep it at or below the bottom edge of the screen to avoid flicker.
 
 > **Priority example** (hypothetical zones): Play Zone 0, Secret Zone 5, Discard Pile 10. A played card tries the play zone first, then the secret zone, then the discard pile. If all three reject it, it stays in the hand.
 
@@ -283,12 +283,12 @@ When you drag a card above the **Play Height** line, it triggers the card’s �
 ## 6) What’s happening under the hood
 
 1. **HandStateService** tracks the `CardRef`s in each player's hand.
-2. **SceneCardLookup** tracks existing cards in the scene.
-3. The **PlayerHand** listens for add/remove events.
+2. **[SceneCardLookup](API.md#scenecardlookup-l)** tracks existing cards in the scene.
+3. The **[PlayerHand](API.md#playerhand-c)** listens for add/remove events.
    1. On add, it checks if the card instance already exists in the scene. (IE returning to hand from play)
    2. If not, it calls `VisualFactory.Build(...)`.
 4. The **Visual Factory** builds the prefab and initializes `CardBehaviour` + `CardPresenter`.
-5. The **CardPresenter** binds to the global **Card Skin** and **ViewModel**.
+5. The **[CardPresenter](API.md#cardpresenter-sealed-l)** binds to the global **Card Skin** and **ViewModel**.
 6. **PlayerHand** manages layout and animation curves.
 7. **Play Resolvers** handle card movement when played.
 
@@ -302,11 +302,11 @@ When you drag a card above the **Play Height** line, it triggers the card’s �
 
 > **Goal:** Replace the placeholder frame and back, see how the name and rules text get onto a card, and control which fields show.
 
-> **Want a field the toolkit doesn't have, like Cost or Attack?** This section only works with the built-in fields: name, rules text, art and frame. A new text object needs something to fill it with data, so adding one here will just show placeholder text. **[Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data)** walks through adding your own field.
+> **Want a field the toolkit doesn't have, like Cost or Attack?** This section only works with the built-in fields: name, rules text, art and frame. A new text object needs something to fill it with data, so adding one here will just show placeholder text. **[Section 6](#quick-start-custom-data)** walks through adding your own field.
 
 ## 1) Use your own frame and back
 
-1. Make your frame and back images at 1000×1400 (5:7, the card's ratio) and import them as sprites. [Appendix A: Card Art](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-art) has the full import settings.
+1. Make your frame and back images at 1000×1400 (5:7, the card's ratio) and import them as sprites. [Appendix A: Card Art](#quick-start-art) has the full import settings.
 2. Open `Config/CardFrameLibrary.asset`.
 3. Set **Default Frame** to your frame and **Default Card Back** to your back.
 4. Press **Play**. Every card now uses your frame and back.
@@ -322,8 +322,8 @@ Open it and select the **Title** text object. Four pieces work together to show 
 | Piece                              | Where                        | What it does                            |
 | ---------------------------------- | ---------------------------- | --------------------------------------- |
 | **Title** text (TextMeshPro)       | Under `DesignRoot`           | The text you see on the card.           |
-| **FieldToggle** (Builtin: `Title`) | On the Title object          | Shows or hides the text.                |
-| **Default Card View Binder**       | Prefab root, **Title** slot  | Writes the card's name into the text.   |
+| **[FieldToggle](API.md#fieldtoggle-c)** (Builtin: `Title`) | On the Title object          | Shows or hides the text.                |
+| **[Default Card View Binder](API.md#defaultcardviewbinder-e)**       | Prefab root, **Title** slot  | Writes the card's name into the text.   |
 | **Enabled Fields**                 | `Config/CardSkin_User.asset` | Turns the Title field on for all cards. |
 
 **Rules Text** works the same way, with its FieldToggle set to `RulesText`. The text comes from the **Card Name** and **Rules Text** fields on each `ScriptableCard`.
@@ -341,7 +341,7 @@ Edit the text objects in `WorldViewPrefab_User` like any UI: font, size, color, 
 
 Press **Play** to check the result on the cards in your hand.
 
-> Adding a new text object here won't fill it with card data. To add your own field, see **[Section 6](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-custom-data)**.
+> Adding a new text object here won't fill it with card data. To add your own field, see **[Section 6](#quick-start-custom-data)**.
 
 ## 4) Turn a field off
 
@@ -349,7 +349,7 @@ Press **Play** to check the result on the cards in your hand.
 2. In **Enabled Fields**, untick **Rules Text**.
 3. Press **Play**. The rules text is hidden on every card.
 
-Tick it again to bring it back. The Card Skin turns fields on or off for your whole game without editing the prefab. A field also hides on its own for any card with no data for it, such as a card with empty Rules Text. [Appendix B](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility) has the full rules.
+Tick it again to bring it back. The Card Skin turns fields on or off for your whole game without editing the prefab. A field also hides on its own for any card with no data for it, such as a card with empty Rules Text. [Appendix B](#quick-start-field-visibility) has the full rules.
 
 ## 5) Check the hover overlay
 
@@ -375,7 +375,7 @@ The scripts in this section ship in `Samples/Scripts/`. Follow along with them, 
 
 ## 1) Store the cost on the card: an addon
 
-An addon is a small piece of extra data attached to a `ScriptableCard`.
+An [addon](API.md#cardaddon-e) is a small piece of extra data attached to a `ScriptableCard`.
 
 ```csharp
 using CardHandToolkit.Model;
@@ -397,7 +397,7 @@ namespace CardHandToolkit.Samples
 
 ## 2) Read the cost: a ViewModel
 
-A ViewModel turns card data into what the card displays. `Sample_CardVM` fills the same built-in fields as the toolkit's `DefaultCardVM` and adds `Cost`. It also reads a `Suit`, which [step 8](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-suits) covers. If you're writing your own copies, leave the suit lines out until then.
+A [ViewModel](API.md#icardviewmodel-e) turns card data into what the card displays. `Sample_CardVM` fills the same built-in fields as the toolkit's [`DefaultCardVM`](API.md#defaultviewmodelfactory--defaultcardvm-l) and adds `Cost`. It also reads a `Suit`, which [step 8](#quick-start-suits) covers. If you're writing your own copies, leave the suit lines out until then.
 
 ```csharp
 using System;
@@ -469,7 +469,7 @@ Two things to notice:
 
 ## 3) Use your ViewModel: a factory
 
-The Visual Factory asks a ViewModel factory to create each card's ViewModel.
+The Visual Factory asks a [ViewModel factory](API.md#icardviewmodelfactory-e) to create each card's ViewModel.
 
 ```csharp
 using CardHandToolkit.Model;
@@ -498,7 +498,7 @@ namespace CardHandToolkit.Samples
 
 ## 4) Show the cost: a binder
 
-The binder writes ViewModel data into the UI. `Sample_CardViewBinder` extends the toolkit's default binder, so the name and rules text keep working, and adds a Cost text. Its suit icon and suit colors are for [step 8](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-suits).
+The binder writes ViewModel data into the UI. `Sample_CardViewBinder` extends the toolkit's default binder, so the name and rules text keep working, and adds a Cost text. Its suit icon and suit colors are for [step 8](#quick-start-suits).
 
 ```csharp
 using TMPro;
@@ -563,11 +563,11 @@ Press **Play**:
 
 If the cost never shows, check that the FieldToggle's **Custom Key**, the **Enabled Custom Fields** entry and `CostKey` all say `Cost`. A key that's missing from the Card Skin logs a one-time warning in the Console.
 
-> To show something only on cards _without_ a cost, or to toggle several objects from one key, see **Invert** and **Targets** in [Appendix B](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/quickstart.html#quick-start-field-visibility).
+> To show something only on cards _without_ a cost, or to toggle several objects from one key, see **Invert** and **Targets** in [Appendix B](#quick-start-field-visibility).
 
 ## 7) (Optional) Change the cost at runtime
 
-You can get any card's ViewModel from its `CardPresenter`:
+You can get any card's [ViewModel](API.md#changing-cards-at-runtime) from its `CardPresenter`:
 
 ```csharp
 if (card.GetComponent<CardPresenter>().ViewModel is Sample_CardVM vm)
@@ -643,7 +643,7 @@ Press **Play**:
 
 If the cost doesn't change color, check that the palette is assigned on the Card Skin and that its keys match the suit names. If the glow doesn't show, check that **Underlay** is ticked on the Cost text's material preset and that its alpha isn't 0.
 
-> `CardColorPalette` and `SetTextColor` work for any colored text: rarity, buffed stats in green, damaged health in red.
+> [`CardColorPalette`](API.md#cardcolorpalette-c) and `SetTextColor` work for any colored text: rarity, buffed stats in green, damaged health in red.
 
 ---
 
@@ -655,7 +655,7 @@ If the cost doesn't change color, check that the palette is assigned on the Card
 
 > You now have a working setup: cards that draw, display data, and can be played into zones!
 
-With your toolkit configured, you can start shaping your own game’s rules, visuals, and card logic. Start with the [Concepts](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#concepts) in the API Reference, then use its guides for each part of the toolkit.
+With your toolkit configured, you can start shaping your own game’s rules, visuals, and card logic. Start with the [Concepts](API.md#concepts) in the API Reference, then use its guides for each part of the toolkit.
 
 ---
 
@@ -663,16 +663,16 @@ With your toolkit configured, you can start shaping your own game’s rules, vis
 
 | Guide | What it covers |
 | --- | --- |
-| **[Zones & Play](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#zones--play)** | How a drag becomes a play, the example zones and their Drop Area, moving cards from code, and writing your own `IPlayResolver`. |
-| **[Card Data & Decks](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-data--decks)** | Cards and copies (`CardRef`), decks, drawing, discarding and reshuffling, and `HandStateService`. |
-| **[Card Visuals](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#card-visuals)** | How the Visual Factory, Card Skin, view model, binder and field toggles fit together; changing cards at runtime; finished card images. |
-| **[Interaction](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#interaction)** | Hover, drag and tap; interaction policies, including turn-based rules; the Hover Profile and hover previews. |
-| **[Hands & Layout](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html#hands--layout)** | The Player Hand's focus, Play Height and reordering; opponent hands; shaping the fan. |
+| **[Zones & Play](API.md#zones--play)** | How a drag becomes a play, the example zones and their Drop Area, moving cards from code, and writing your own `IPlayResolver`. |
+| **[Card Data & Decks](API.md#card-data--decks)** | Cards and copies (`CardRef`), decks, drawing, discarding and reshuffling, and `HandStateService`. |
+| **[Card Visuals](API.md#card-visuals)** | How the Visual Factory, Card Skin, view model, binder and field toggles fit together; changing cards at runtime; finished card images. |
+| **[Interaction](API.md#interaction)** | Hover, drag and tap; interaction policies, including turn-based rules; the Hover Profile and hover previews. |
+| **[Hands & Layout](API.md#hands--layout)** | The Player Hand's focus, Play Height and reordering; opponent hands; shaping the fan. |
 
 ## 2) Where to go next
 
-- **[API Reference](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/api.html)**: the guides above, plus an A–Z entry for every public type.
-- **[FAQ](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/docs/faq.html)**: answers to common setup and integration questions.
+- **[API Reference](API.md)**: the guides above, plus an A–Z entry for every public type.
+- **[FAQ](FAQ.md)**: answers to common setup and integration questions.
 
 ## 3) Community & Support
 
@@ -714,7 +714,7 @@ If you have questions, feedback, or want to show what you’ve built:
 
 # Appendix B: How Fields Show and Hide
 
-Both the **CardPresenter** (cards in the scene) and the **HoverPresenter** (the hover overlay) decide which elements of the World View are visible:
+Both the **CardPresenter** (cards in the scene) and the **[HoverPresenter](API.md#hoverpresenter--ihoverpresenter-ce)** (the hover overlay) decide which elements of the World View are visible:
 
 1. The presenter collects every **FieldToggle** in the World View.
 2. An element with a **Builtin** field shows when that field is ticked in the Card Skin's **Enabled Fields** _and_ the ViewModel has data for it (for example, non-empty Rules Text).

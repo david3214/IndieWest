@@ -135,7 +135,7 @@
 </tr>
 </thead>
 <tbody><tr>
-<td><strong>CardPlayable_User.prefab</strong></td>
+<td><strong><a href="api.html#the-components-on-a-card">CardPlayable_User.prefab</a></strong></td>
 <td>Variant of <code>CHT_CardPlayable_Template</code>, used for all cards in-game. Customize its interaction feel or swap its 3D model.</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
@@ -150,38 +150,38 @@
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 <tr>
-<td><strong>WorldViewPrefab_User.prefab</strong></td>
+<td><strong><a href="api.html#two-layers-the-mesh-and-the-world-view">WorldViewPrefab_User.prefab</a></strong></td>
 <td>Variant of <code>CHT_WorldViewPrefab_Template</code>. Runtime display shown on cards (name, rules text, art).</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 <tr>
-<td><strong>CardSkin_User.asset</strong></td>
+<td><strong><a href="api.html#cardskin-c">CardSkin_User.asset</a></strong></td>
 <td>Copy of the template Card Skin. Sets the World View prefab, which fields show, scaling and colors.</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 <tr>
-<td><strong>CardDatabase.asset</strong></td>
+<td><strong><a href="api.html#carddatabase-c">CardDatabase.asset</a></strong></td>
 <td>Empty Card Database scriptable Object. Put all Scriptable Cards in here for the loader to build your library</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 <tr>
-<td><strong>CardFrameLibrary.asset</strong></td>
+<td><strong><a href="api.html#cardframelibrary-c">CardFrameLibrary.asset</a></strong></td>
 <td>Card Frame Library. Starts with a placeholder frame and back; replace them with your own. Plain white if a slot is empty.</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 <tr>
-<td><strong>HoverProfile.asset</strong></td>
+<td><strong><a href="api.html#hoverprofile-c">HoverProfile.asset</a></strong></td>
 <td>Hover timings and offsets for mouse and touch.</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 <tr>
-<td><strong>CardVisualFactory_User.asset</strong></td>
+<td><strong><a href="api.html#cardvisualfactoryso-c">CardVisualFactory_User.asset</a></strong></td>
 <td>Copy of the template Visual Factory. Initializes cards at runtime and holds the global Card Skin + Card Prefab references.</td>
 <td><code>Assets/CardHandToolkit/Config/</code></td>
 </tr>
 </tbody></table>
 </div>
-<p>The <strong>CHT_CardToolkitLoader</strong> in your Game scene now references this Visual Factory, so every card spawned at runtime will use your customized skin and prefab.</p>
+<p>The <strong><a href="api.html#cardtoolkitruntime-c">CHT_CardToolkitLoader</a></strong> in your Game scene now references this Visual Factory, so every card spawned at runtime will use your customized skin and prefab.</p>
 <div class="heading"><h2 id="2-create-scriptablecards-your-card-data">2) Create ScriptableCards (your card data)</h2><a class="heading-anchor" href="#2-create-scriptablecards-your-card-data" aria-label="Link to section: 2) Create ScriptableCards (your card data)">#</a></div>
 <ol>
 <li><strong>Create ▸ Card Toolkit ▸ Card</strong> (e.g., <code>Fireball.asset</code>, <code>Goblin.asset</code>).</li>
@@ -196,7 +196,7 @@
 </li>
 </ol>
 <blockquote>
-<p>Each <code>ScriptableCard</code> represents gameplay data only; visuals are handled by the worldViewPrefab + global skin at runtime.</p>
+<p>Each <a href="api.html#scriptablecard-c"><code>ScriptableCard</code></a> represents gameplay data only; visuals are handled by the worldViewPrefab + global skin at runtime.</p>
 </blockquote>
 <div class="heading"><h2 id="3-add-your-scriptablecards-to-the-card-database">3) Add your ScriptableCards to the Card Database</h2><a class="heading-anchor" href="#3-add-your-scriptablecards-to-the-card-database" aria-label="Link to section: 3) Add your ScriptableCards to the Card Database">#</a></div>
 <ol>
@@ -210,12 +210,12 @@
 <div class="heading"><h2 id="4-optional-tune-your-card-prefab-and-smoke-test-it-no-code">4) (Optional) Tune your card prefab and smoke test it (no code)</h2><a class="heading-anchor" href="#4-optional-tune-your-card-prefab-and-smoke-test-it-no-code" aria-label="Link to section: 4) (Optional) Tune your card prefab and smoke test it (no code)">#</a></div>
 <p>Open <strong><code>CardPlayable_User.prefab</code></strong> to tune your game’s “feel”:</p>
 <ul>
-<li><strong>DragCard</strong> – smoothing (Lerp Speed), drag plane depth, mouse/touch drag thresholds, tilt</li>
-<li><strong>CardBehaviour</strong> – leave <strong>Definition</strong> empty (runtime assigns it)</li>
+<li><strong><a href="api.html#dragcard-c">DragCard</a></strong> – smoothing (Lerp Speed), drag plane depth, mouse/touch drag thresholds, tilt</li>
+<li><strong><a href="api.html#cardbehaviour-l">CardBehaviour</a></strong> – leave <strong>Definition</strong> empty (runtime assigns it)</li>
 </ul>
 <blockquote>
 <p>These tweaks affect <strong>every</strong> card instance since all cards use this single prefab. Hover timing (hover timeout, long-press delay, hover scale) lives in <strong>HoverProfile</strong>, not on the prefab.</p>
-<p>The shape of the hand&#39;s fan (spread, arc, card rotation) lives in a <strong>Fan Layout Profile</strong>. The Player Hand uses the shipped <code>CHT_FanLayoutProfile</code>. To change it, create your own from <strong>Create ▸ Card Toolkit ▸ Config ▸ Fan Layout Profile</strong> and assign it to the <strong>Fan Layout</strong> field on the <strong>Player Hand</strong> in your Game scene.</p>
+<p>The shape of the hand&#39;s fan (spread, arc, card rotation) lives in a <strong><a href="api.html#fanlayoutprofile-c">Fan Layout Profile</a></strong>. The Player Hand uses the shipped <code>CHT_FanLayoutProfile</code>. To change it, create your own from <strong>Create ▸ Card Toolkit ▸ Config ▸ Fan Layout Profile</strong> and assign it to the <strong>Fan Layout</strong> field on the <strong>Player Hand</strong> in your Game scene.</p>
 </blockquote>
 <p>Then try it out:</p>
 <ol>
@@ -235,10 +235,10 @@
 <p><strong>Goal:</strong> Automatically draw cards from a deck into the player’s hand and see them come alive with data and visuals.</p>
 </blockquote>
 <div class="heading"><h2 id="1-how-drawing-works">1) How drawing works</h2><a class="heading-anchor" href="#1-how-drawing-works" aria-label="Link to section: 1) How drawing works">#</a></div>
-<p>At runtime, cards are added to hands through the <strong><code>HandStateService</code></strong>.</p>
+<p>At runtime, cards are added to hands through the <strong><a href="api.html#handstateservice-l"><code>HandStateService</code></a></strong>.</p>
 <pre tabindex="0"><code class="language-csharp">HandStateService.Instance.AddCard(<span class="hljs-built_in">int</span> seat, CardRef cardRef);
 </code></pre>
-<p>A <code>CardRef</code> pairs a card&#39;s <strong>slug</strong> (which <code>ScriptableCard</code> it is) with a unique <strong>instance id</strong> (which copy it is), so two copies of the same card can be in play at once.</p>
+<p>A <a href="api.html#cardref-l"><code>CardRef</code></a> pairs a card&#39;s <strong>slug</strong> (which <code>ScriptableCard</code> it is) with a unique <strong>instance id</strong> (which copy it is), so two copies of the same card can be in play at once.</p>
 <p>When you call this:</p>
 <ol>
 <li>An event is fired.</li>
@@ -261,7 +261,7 @@
 <li>In the Inspector, add your cards to the list (ScriptableCards). Each entry is one physical card, so a list with one entry is a one-card deck. For testing, add your sample card several times (10 or more is a good start) so you can see a full hand fan out. Each copy gets its own instance id when the deck is built, so duplicates are fine.</li>
 </ol>
 <blockquote>
-<p><strong>Note:</strong> The <code>DeckList</code> asset is a simple list of cards. The <code>Deck</code> class manages state (draw, discard, shuffle). Keep the <code>Deck</code> you get from <code>ToSlugDeck()</code> and draw from it for the rest of the game — calling <code>ToSlugDeck()</code> again starts a fresh deck. You choose what happens when the deck runs out by passing a policy to <code>ToSlugDeck()</code>, such as <code>ReshuffleOnEmpty</code> or <code>NoReshufflePolicy</code>.</p>
+<p><strong>Note:</strong> The <a href="api.html#decklist-c"><code>DeckList</code></a> asset is a simple list of cards. The <a href="api.html#deck-l"><code>Deck</code></a> class manages state (draw, discard, shuffle). Keep the <code>Deck</code> you get from <code>ToSlugDeck()</code> and draw from it for the rest of the game — calling <code>ToSlugDeck()</code> again starts a fresh deck. You choose what happens when the deck runs out by passing a policy to <code>ToSlugDeck()</code>, such as <a href="api.html#iemptydeckpolicy--reshuffleonempty--noreshufflepolicy-ec"><code>ReshuffleOnEmpty</code> or <code>NoReshufflePolicy</code></a>.</p>
 </blockquote>
 <div class="heading"><h2 id="3-auto-draw-on-start">3) Auto-draw on Start</h2><a class="heading-anchor" href="#3-auto-draw-on-start" aria-label="Link to section: 3) Auto-draw on Start">#</a></div>
 <p>The toolkit includes a helper script for this, <code>Samples/Scripts/Sample_DrawOnStart.cs</code>. To use it:</p>
@@ -271,7 +271,7 @@
 <li>Drag the Deck List you created in step 2 into the component&#39;s <strong>Deck List</strong> field.</li>
 <li>(Optional) Drag <code>Runtime/Prefabs/CHT_DeckVisual</code> into your Game scene and place it beside the hand. Then drag the <strong>CHT_DeckVisual</strong> object from the <strong>Hierarchy</strong> (not the prefab from the Project window) into the component&#39;s <strong>Visual Deck</strong> field. The deck then shows as a pile, and drawn cards fly from it into the hand.</li>
 </ol>
-<p>On the scene&#39;s <strong>Visual Deck</strong> component, <strong>Max Visible Layers</strong> defaults to <code>8</code>. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. <code>VisualDiscard</code> uses the same setting. Select either pile to preview its visible layers in the gizmo.</p>
+<p>On the scene&#39;s <strong><a href="api.html#visualdeck--visualdiscard-c">Visual Deck</a></strong> component, <strong>Max Visible Layers</strong> defaults to <code>8</code>. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. <code>VisualDiscard</code> uses the same setting. Select either pile to preview its visible layers in the gizmo.</p>
 <p>Here&#39;s what it does:</p>
 <pre tabindex="0"><code class="language-csharp"><span class="hljs-keyword">using</span> System.Collections;
 <span class="hljs-keyword">using</span> UnityEngine;
@@ -333,12 +333,12 @@
 <div class="heading"><h2 id="4-play-a-card">4) Play a card</h2><a class="heading-anchor" href="#4-play-a-card" aria-label="Link to section: 4) Play a card">#</a></div>
 <p>When you drag a card above the <strong>Play Height</strong> line, it triggers the card’s “play” action.</p>
 <ul>
-<li>Cards check every active <strong>IPlayResolver</strong> in the scene, lowest <strong>Priority</strong> first. The toolkit ships two: <code>LineBoardZone</code> and <code>SingleSlotZone</code>.</li>
+<li>Cards check every active <strong><a href="api.html#iplayresolver-e">IPlayResolver</a></strong> in the scene, lowest <strong>Priority</strong> first. The toolkit ships two: <a href="api.html#lineboardzone-example-c"><code>LineBoardZone</code></a> and <a href="api.html#singleslotzone-example-c"><code>SingleSlotZone</code></a>.</li>
 <li>The first one whose <code>TryResolvePlay</code> accepts the card takes it, and the card moves to that zone.</li>
 <li>If none accepts it, the card returns to the hand.</li>
 </ul>
 <blockquote>
-<p><strong>Play Height</strong> is set on the <strong>Player Hand</strong> (default <code>1.5</code>) and works the same for mouse and touch. Select the Player Hand to see it as a red gizmo line in the Scene view. The Player Hand&#39;s <strong>Hover Anchor</strong> object has its own gizmo, marking where hovered cards rest. Keep it at or below the bottom edge of the screen to avoid flicker.</p>
+<p><strong>Play Height</strong> is set on the <strong>Player Hand</strong> (default <code>1.5</code>) and works the same for mouse and touch. Select the Player Hand to see it as a red gizmo line in the Scene view. The Player Hand&#39;s <strong><a href="api.html#hoveranchor-c">Hover Anchor</a></strong> object has its own gizmo, marking where hovered cards rest. Keep it at or below the bottom edge of the screen to avoid flicker.</p>
 </blockquote>
 <blockquote>
 <p><strong>Priority example</strong> (hypothetical zones): Play Zone 0, Secret Zone 5, Discard Pile 10. A played card tries the play zone first, then the secret zone, then the discard pile. If all three reject it, it stays in the hand.</p>
@@ -381,14 +381,14 @@
 <div class="heading"><h2 id="6-whats-happening-under-the-hood">6) What’s happening under the hood</h2><a class="heading-anchor" href="#6-whats-happening-under-the-hood" aria-label="Link to section: 6) What’s happening under the hood">#</a></div>
 <ol>
 <li><strong>HandStateService</strong> tracks the <code>CardRef</code>s in each player&#39;s hand.</li>
-<li><strong>SceneCardLookup</strong> tracks existing cards in the scene.</li>
-<li>The <strong>PlayerHand</strong> listens for add/remove events.<ol>
+<li><strong><a href="api.html#scenecardlookup-l">SceneCardLookup</a></strong> tracks existing cards in the scene.</li>
+<li>The <strong><a href="api.html#playerhand-c">PlayerHand</a></strong> listens for add/remove events.<ol>
 <li>On add, it checks if the card instance already exists in the scene. (IE returning to hand from play)</li>
 <li>If not, it calls <code>VisualFactory.Build(...)</code>.</li>
 </ol>
 </li>
 <li>The <strong>Visual Factory</strong> builds the prefab and initializes <code>CardBehaviour</code> + <code>CardPresenter</code>.</li>
-<li>The <strong>CardPresenter</strong> binds to the global <strong>Card Skin</strong> and <strong>ViewModel</strong>.</li>
+<li>The <strong><a href="api.html#cardpresenter-sealed-l">CardPresenter</a></strong> binds to the global <strong>Card Skin</strong> and <strong>ViewModel</strong>.</li>
 <li><strong>PlayerHand</strong> manages layout and animation curves.</li>
 <li><strong>Play Resolvers</strong> handle card movement when played.</li>
 </ol>
@@ -430,12 +430,12 @@
 <td>The text you see on the card.</td>
 </tr>
 <tr>
-<td><strong>FieldToggle</strong> (Builtin: <code>Title</code>)</td>
+<td><strong><a href="api.html#fieldtoggle-c">FieldToggle</a></strong> (Builtin: <code>Title</code>)</td>
 <td>On the Title object</td>
 <td>Shows or hides the text.</td>
 </tr>
 <tr>
-<td><strong>Default Card View Binder</strong></td>
+<td><strong><a href="api.html#defaultcardviewbinder-e">Default Card View Binder</a></strong></td>
 <td>Prefab root, <strong>Title</strong> slot</td>
 <td>Writes the card&#39;s name into the text.</td>
 </tr>
@@ -482,7 +482,7 @@
 <p>The scripts in this section ship in <code>Samples/Scripts/</code>. Follow along with them, or write your own copies with different class names.</p>
 <p><strong>How the data flows:</strong> <strong>addon</strong> (data on the card) → <strong>ViewModel</strong> (reads it and decides what shows) → <strong>binder</strong> (writes it into the UI) → <strong>FieldToggle</strong> (shows or hides the element).</p>
 <div class="heading"><h2 id="1-store-the-cost-on-the-card-an-addon">1) Store the cost on the card: an addon</h2><a class="heading-anchor" href="#1-store-the-cost-on-the-card-an-addon" aria-label="Link to section: 1) Store the cost on the card: an addon">#</a></div>
-<p>An addon is a small piece of extra data attached to a <code>ScriptableCard</code>.</p>
+<p>An <a href="api.html#cardaddon-e">addon</a> is a small piece of extra data attached to a <code>ScriptableCard</code>.</p>
 <pre tabindex="0"><code class="language-csharp"><span class="hljs-keyword">using</span> CardHandToolkit.Model;
 <span class="hljs-keyword">using</span> UnityEngine;
 
@@ -501,7 +501,7 @@
 <li>Do this for a few cards, and leave at least one card without it.</li>
 </ol>
 <div class="heading"><h2 id="2-read-the-cost-a-viewmodel">2) Read the cost: a ViewModel</h2><a class="heading-anchor" href="#2-read-the-cost-a-viewmodel" aria-label="Link to section: 2) Read the cost: a ViewModel">#</a></div>
-<p>A ViewModel turns card data into what the card displays. <code>Sample_CardVM</code> fills the same built-in fields as the toolkit&#39;s <code>DefaultCardVM</code> and adds <code>Cost</code>. It also reads a <code>Suit</code>, which <a href="#quick-start-suits">step 8</a> covers. If you&#39;re writing your own copies, leave the suit lines out until then.</p>
+<p>A <a href="api.html#icardviewmodel-e">ViewModel</a> turns card data into what the card displays. <code>Sample_CardVM</code> fills the same built-in fields as the toolkit&#39;s <a href="api.html#defaultviewmodelfactory--defaultcardvm-l"><code>DefaultCardVM</code></a> and adds <code>Cost</code>. It also reads a <code>Suit</code>, which <a href="#quick-start-suits">step 8</a> covers. If you&#39;re writing your own copies, leave the suit lines out until then.</p>
 <pre tabindex="0"><code class="language-csharp"><span class="hljs-keyword">using</span> System;
 <span class="hljs-keyword">using</span> System.Collections.Generic;
 <span class="hljs-keyword">using</span> CardHandToolkit.Model;
@@ -569,7 +569,7 @@
 <li><strong><code>OnChanged</code></strong> tells the card to refresh. <code>SetCost</code> raises it so a new cost shows straight away.</li>
 </ul>
 <div class="heading"><h2 id="3-use-your-viewmodel-a-factory">3) Use your ViewModel: a factory</h2><a class="heading-anchor" href="#3-use-your-viewmodel-a-factory" aria-label="Link to section: 3) Use your ViewModel: a factory">#</a></div>
-<p>The Visual Factory asks a ViewModel factory to create each card&#39;s ViewModel.</p>
+<p>The Visual Factory asks a <a href="api.html#icardviewmodelfactory-e">ViewModel factory</a> to create each card&#39;s ViewModel.</p>
 <pre tabindex="0"><code class="language-csharp"><span class="hljs-keyword">using</span> CardHandToolkit.Model;
 <span class="hljs-keyword">using</span> UnityEngine;
 
@@ -660,7 +660,7 @@
 <p>To show something only on cards <em>without</em> a cost, or to toggle several objects from one key, see <strong>Invert</strong> and <strong>Targets</strong> in <a href="#quick-start-field-visibility">Appendix B</a>.</p>
 </blockquote>
 <div class="heading"><h2 id="7-optional-change-the-cost-at-runtime">7) (Optional) Change the cost at runtime</h2><a class="heading-anchor" href="#7-optional-change-the-cost-at-runtime" aria-label="Link to section: 7) (Optional) Change the cost at runtime">#</a></div>
-<p>You can get any card&#39;s ViewModel from its <code>CardPresenter</code>:</p>
+<p>You can get any card&#39;s <a href="api.html#changing-cards-at-runtime">ViewModel</a> from its <code>CardPresenter</code>:</p>
 <pre tabindex="0"><code class="language-csharp"><span class="hljs-keyword">if</span> (card.GetComponent&lt;CardPresenter&gt;().ViewModel <span class="hljs-keyword">is</span> Sample_CardVM vm)
     vm.SetCost(vm.Cost - <span class="hljs-number">1</span>);
 </code></pre>
@@ -724,7 +724,7 @@
 </ul>
 <p>If the cost doesn&#39;t change color, check that the palette is assigned on the Card Skin and that its keys match the suit names. If the glow doesn&#39;t show, check that <strong>Underlay</strong> is ticked on the Cost text&#39;s material preset and that its alpha isn&#39;t 0.</p>
 <blockquote>
-<p><code>CardColorPalette</code> and <code>SetTextColor</code> work for any colored text: rarity, buffed stats in green, damaged health in red.</p>
+<p><a href="api.html#cardcolorpalette-c"><code>CardColorPalette</code></a> and <code>SetTextColor</code> work for any colored text: rarity, buffed stats in green, damaged health in red.</p>
 </blockquote>
 <hr>
 <p><strong>Next:</strong> Section 7 points you to the rest of the documentation.</p>
@@ -810,7 +810,7 @@
 </ol>
 <p><a id="quick-start-field-visibility"></a></p>
 <div class="heading"><h1 id="appendix-b-how-fields-show-and-hide">Appendix B: How Fields Show and Hide</h1><a class="heading-anchor" href="#appendix-b-how-fields-show-and-hide" aria-label="Link to section: Appendix B: How Fields Show and Hide">#</a></div>
-<p>Both the <strong>CardPresenter</strong> (cards in the scene) and the <strong>HoverPresenter</strong> (the hover overlay) decide which elements of the World View are visible:</p>
+<p>Both the <strong>CardPresenter</strong> (cards in the scene) and the <strong><a href="api.html#hoverpresenter--ihoverpresenter-ce">HoverPresenter</a></strong> (the hover overlay) decide which elements of the World View are visible:</p>
 <ol>
 <li>The presenter collects every <strong>FieldToggle</strong> in the World View.</li>
 <li>An element with a <strong>Builtin</strong> field shows when that field is ticked in the Card Skin&#39;s <strong>Enabled Fields</strong> <em>and</em> the ViewModel has data for it (for example, non-empty Rules Text).</li>

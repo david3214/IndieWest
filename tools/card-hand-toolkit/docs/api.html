@@ -79,9 +79,9 @@
 <img src="Images/ToolkitOverview.png" alt="Runtime hub supplies shared assets while game code updates hand state and hand views show the cards." width="760" height="297" loading="lazy" decoding="async">
 
 <ul>
-<li><strong>One runtime hub.</strong> <code>CardToolkitRuntime</code>, on the <code>CHT_CardToolkitLoader</code> prefab, holds the project-wide references every system reads. Reach it through <code>CardToolkitRuntime.Instance</code>.</li>
-<li><strong>Your code owns the game; the toolkit shows it.</strong> Hands never add or remove cards on their own: your code changes <code>HandStateService</code> (and your <code>Deck</code>), and the hands follow. The toolkit has no rules engine. Costs, suits, turns and phases belong to your game, through addons, view models and interaction policies.</li>
-<li><strong>A card has three parts.</strong> A <code>ScriptableCard</code> is the design, a <code>CardRef</code> is one copy of it in play, and the card GameObject shows that copy. On the GameObject, <code>CardBehaviour</code> holds its state, the card mesh and World View draw it, and <code>CardHoverable</code>, <code>DragCard</code> and <code>CardTap</code> handle the player&#39;s input.</li>
+<li><strong>One runtime hub.</strong> <a href="#cardtoolkitruntime-c"><code>CardToolkitRuntime</code></a>, on the <code>CHT_CardToolkitLoader</code> prefab, holds the project-wide references every system reads. Reach it through <code>CardToolkitRuntime.Instance</code>.</li>
+<li><strong>Your code owns the game; the toolkit shows it.</strong> Hands never add or remove cards on their own: your code changes <a href="#handstateservice-l"><code>HandStateService</code></a> (and your <a href="#deck-l"><code>Deck</code></a>), and the hands follow. The toolkit has no rules engine. Costs, suits, turns and phases belong to your game, through addons, view models and interaction policies.</li>
+<li><strong>A card has three parts.</strong> A <a href="#scriptablecard-c"><code>ScriptableCard</code></a> is the design, a <a href="#cardref-l"><code>CardRef</code></a> is one copy of it in play, and the card GameObject shows that copy. On the GameObject, <a href="#cardbehaviour-l"><code>CardBehaviour</code></a> holds its state, the card mesh and World View draw it, and <a href="#cardhoverable-c"><code>CardHoverable</code></a>, <a href="#dragcard-c"><code>DragCard</code></a> and <a href="#cardtap-c"><code>CardTap</code></a> handle the player&#39;s input.</li>
 </ul>
 <div class="heading"><h3 id="who-owns-what">Who owns what?</h3><a class="heading-anchor" href="#who-owns-what" aria-label="Link to section: Who owns what?">#</a></div>
 <div class="table-wrap" tabindex="0" role="region" aria-label="Table">
@@ -94,35 +94,35 @@
 </thead>
 <tbody><tr>
 <td>A card design and its addon data</td>
-<td><code>ScriptableCard</code>, listed in the <code>CardDatabase</code>.</td>
+<td><a href="#scriptablecard-c"><code>ScriptableCard</code></a>, listed in the <a href="#carddatabase-c"><code>CardDatabase</code></a>.</td>
 </tr>
 <tr>
 <td>One copy&#39;s identity</td>
-<td><code>CardRef</code>: a slug plus a unique instance id. <code>CardBehaviour</code> carries that identity on its GameObject.</td>
+<td><a href="#cardref-l"><code>CardRef</code></a>: a slug plus a unique instance id. <a href="#cardbehaviour-l"><code>CardBehaviour</code></a> carries that identity on its GameObject.</td>
 </tr>
 <tr>
 <td>Draw and discard pile contents</td>
-<td>Your runtime <code>Deck&lt;CardRef&gt;</code>.</td>
+<td>Your runtime <a href="#deck-l"><code>Deck&lt;CardRef&gt;</code></a>.</td>
 </tr>
 <tr>
 <td>Hand membership, by seat</td>
-<td><code>HandStateService</code>. Hand views follow its events.</td>
+<td><a href="#handstateservice-l"><code>HandStateService</code></a>. Hand views follow its events.</td>
 </tr>
 <tr>
 <td>Existing card visuals</td>
-<td><code>SceneCardLookup</code> maps instance ids to <code>CardBehaviour</code>s; it doesn&#39;t own game state.</td>
+<td><a href="#scenecardlookup-l"><code>SceneCardLookup</code></a> maps instance ids to <a href="#cardbehaviour-l"><code>CardBehaviour</code></a>s; it doesn&#39;t own game state.</td>
 </tr>
 <tr>
 <td>Runtime display data and capabilities</td>
-<td>The card&#39;s <code>ICardViewModel</code>. Your code changes it and raises <code>OnChanged</code>.</td>
+<td>The card&#39;s <a href="#icardviewmodel-e"><code>ICardViewModel</code></a>. Your code changes it and raises <code>OnChanged</code>.</td>
 </tr>
 <tr>
 <td>Face-down, exhausted, hover and selection state</td>
-<td><code>CardBehaviour</code>, which refreshes the card&#39;s views.</td>
+<td><a href="#cardbehaviour-l"><code>CardBehaviour</code></a>, which refreshes the card&#39;s views.</td>
 </tr>
 <tr>
 <td>Binding and field visibility</td>
-<td><code>CardPresenter</code> and <code>HoverPresenter</code>, using the ViewModel and Card Skin.</td>
+<td><a href="#cardpresenter-sealed-l"><code>CardPresenter</code></a> and <a href="#hoverpresenter--ihoverpresenter-ce"><code>HoverPresenter</code></a>, using the ViewModel and <a href="#cardskin-c">Card Skin</a>.</td>
 </tr>
 <tr>
 <td>Rules, turns and effects</td>
@@ -133,13 +133,13 @@
 <div class="heading"><h3 id="card-lifecycle">Card lifecycle</h3><a class="heading-anchor" href="#card-lifecycle" aria-label="Link to section: Card lifecycle">#</a></div>
 <img src="Images/CardLifecycle.png" alt="A drawn CardRef enters hand state, reuses or builds its visual, then stays in hand or moves to an accepting play zone." width="760" height="574" loading="lazy" decoding="async">
 
-<p>The hand checks <code>SceneCardLookup</code> before building a visual, so a card returning from a zone keeps its existing GameObject and ViewModel. In SingleSprite mode, the presenter skips the World View. The <a href="#card-data--decks">Card Data &amp; Decks</a>, <a href="#card-visuals">Card Visuals</a> and <a href="#zones--play">Zones &amp; Play</a> guides cover each step.</p>
+<p>The hand checks <a href="#scenecardlookup-l"><code>SceneCardLookup</code></a> before building a visual, so a card returning from a zone keeps its existing GameObject and ViewModel. In <a href="#finished-card-images-singlesprite-mode">SingleSprite mode</a>, the presenter skips the World View. The <a href="#card-data--decks">Card Data &amp; Decks</a>, <a href="#card-visuals">Card Visuals</a> and <a href="#zones--play">Zones &amp; Play</a> guides cover each step.</p>
 <div class="heading"><h3 id="extend-configure-or-learn">Extend, configure or learn</h3><a class="heading-anchor" href="#extend-configure-or-learn" aria-label="Link to section: Extend, configure or learn">#</a></div>
 <p>Every A–Z entry carries a tag:</p>
 <ul>
-<li><strong>[E] Extend:</strong> interfaces and base classes you implement for your own behavior: <code>ICardZone</code>, <code>IPlayResolver</code>, <code>ILockableZone</code>, <code>IZoneHoverAnchorProvider</code>, <code>CardAddon</code>, <code>ICardViewModel</code>, <code>ICardViewModelFactory</code>, <code>ICardViewBinder</code>, <code>ICardView</code>, <code>IContextualSwitcher</code>, <code>IInteractionPolicy</code>, <code>IInteractionOverride</code>, <code>IHoverPresenter</code>, <code>IPointerSource</code>, <code>IEmptyDeckPolicy</code>, <code>ICardVisualFactory</code>.</li>
-<li><strong>[C] Configure:</strong> components and assets you set up in the Inspector: <code>CardToolkitRuntime</code>, <code>PlayerHand</code>, <code>OpponentHand</code>, the example zones, <code>CardSkin</code>, <code>CardFrameLibrary</code>, <code>CardVisualFactorySO</code>, <code>HoverProfile</code>, <code>HoverRoutingPolicy</code>, <code>FanLayoutProfile</code>.</li>
-<li><strong>[L] Learn:</strong> types you call or read but don&#39;t change: <code>CardBehaviour</code>, <code>HandStateService</code>, <code>Deck</code>, <code>CardPresenter</code>, <code>SceneCardLookup</code>, <code>InteractionController</code>.</li>
+<li><strong>[E] Extend:</strong> interfaces and base classes you implement for your own behavior: <a href="#icardzone-e"><code>ICardZone</code></a>, <a href="#iplayresolver-e"><code>IPlayResolver</code></a>, <a href="#iplayheightzone--ireorderbandzone--ilockablezone-e"><code>ILockableZone</code></a>, <a href="#izonehoveranchorprovider-e"><code>IZoneHoverAnchorProvider</code></a>, <a href="#cardaddon-e"><code>CardAddon</code></a>, <a href="#icardviewmodel-e"><code>ICardViewModel</code></a>, <a href="#icardviewmodelfactory-e"><code>ICardViewModelFactory</code></a>, <a href="#icardviewbinder-e"><code>ICardViewBinder</code></a>, <a href="#icardview-e"><code>ICardView</code></a>, <a href="#icontextualswitcher-e"><code>IContextualSwitcher</code></a>, <a href="#iinteractionpolicy-e"><code>IInteractionPolicy</code></a>, <a href="#iinteractionoverride--cardinteractionoverride-ce"><code>IInteractionOverride</code></a>, <a href="#hoverpresenter--ihoverpresenter-ce"><code>IHoverPresenter</code></a>, <a href="#pointerservice--ipointersource-le"><code>IPointerSource</code></a>, <a href="#iemptydeckpolicy--reshuffleonempty--noreshufflepolicy-ec"><code>IEmptyDeckPolicy</code></a>, <a href="#icardvisualfactory-e"><code>ICardVisualFactory</code></a>.</li>
+<li><strong>[C] Configure:</strong> components and assets you set up in the Inspector: <a href="#cardtoolkitruntime-c"><code>CardToolkitRuntime</code></a>, <a href="#playerhand-c"><code>PlayerHand</code></a>, <a href="#opponenthand-c"><code>OpponentHand</code></a>, the <a href="#the-example-zones">example zones</a>, <a href="#cardskin-c"><code>CardSkin</code></a>, <a href="#cardframelibrary-c"><code>CardFrameLibrary</code></a>, <a href="#cardvisualfactoryso-c"><code>CardVisualFactorySO</code></a>, <a href="#hoverprofile-c"><code>HoverProfile</code></a>, <a href="#hoverroutingpolicy-c"><code>HoverRoutingPolicy</code></a>, <a href="#fanlayoutprofile-c"><code>FanLayoutProfile</code></a>.</li>
+<li><strong>[L] Learn:</strong> types you call or read but don&#39;t change: <a href="#cardbehaviour-l"><code>CardBehaviour</code></a>, <a href="#handstateservice-l"><code>HandStateService</code></a>, <a href="#deck-l"><code>Deck</code></a>, <a href="#cardpresenter-sealed-l"><code>CardPresenter</code></a>, <a href="#scenecardlookup-l"><code>SceneCardLookup</code></a>, <a href="#interactioncontroller-l"><code>InteractionController</code></a>.</li>
 </ul>
 <blockquote>
 <p><strong>Toolkit-owned assets:</strong> assets prefixed <code>CHT_</code> (and everything in <code>Samples/</code>) are replaced when you update the package. Configure your own copies; the Setup Wizard creates them in <code>Assets/CardHandToolkit/Config/</code>.</p>
