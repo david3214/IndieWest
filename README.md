@@ -1,6 +1,6 @@
 # IndieWest website
 
-The IndieWest publisher site: a home page, a page per product, and each product's documentation. It's plain HTML and CSS with no JavaScript, hosted on GitHub Pages. The only build step renders product documentation from Markdown; it needs Node.js 18 or newer and nothing else.
+The IndieWest publisher site: a home page, a page per product, and each product's documentation. It's plain HTML and CSS, hosted on GitHub Pages. The only JavaScript is `assets/video.js`, which plays the product page's demo video in place, and everything works without it. The only build step renders product documentation from Markdown; it needs Node.js 18 or newer and nothing else.
 
 Site address once published: <https://david3214.github.io/IndieWest/>
 
@@ -11,6 +11,7 @@ index.html                         Home page: introduction, Tools, Contact
 tools/card-hand-toolkit/index.html Product page (hand-written)
 tools/card-hand-toolkit/docs/      Documentation (GENERATED - don't edit)
 assets/site.css                    All styles, shared by every page
+assets/video.js                    Click-to-play YouTube videos (see "Videos" below)
 assets/img/<product>/              Web-sized product images
 assets/favicon.svg, favicon-32.png, apple-touch-icon.png
 docs-src/<product>/                Verbatim copy of the product's Unity Documentation folder
@@ -88,6 +89,12 @@ Page titles and the order of the docs navigation are set in `scripts/docs.config
   This writes `<name>-1600.jpg` and `<name>-800.jpg`. Use real captures only.
 - **Documentation:** add an entry to `products` in `scripts/docs.config.json` (slug, name, source folder, snapshot folder, output folder, product page and page titles), then run `import` and `build`.
 
+## Videos
+
+A video on a page starts as a poster image that links to YouTube. Clicking it swaps in YouTube's player (the no-cookie version) and starts playing, so the page makes no requests to YouTube until a visitor presses play. Without JavaScript, or when a page is opened straight from disk, the poster just opens the video on YouTube.
+
+To add one, copy the `<div id="demo" class="frame video">` block from `tools/card-hand-toolkit/index.html`, set the video ID in both the link and `data-youtube-id`, and include `assets/video.js` in the page's `<head>`.
+
 ## Editing checklist
 
 Before or at launch:
@@ -100,6 +107,7 @@ Before or at launch:
 
 Already set:
 
+- **Demo video:** <https://youtu.be/r8N_8kI9sw8>. It plays at the top of the product page, and there are links on the home page and in the product page's support list.
 - **Tutorial video:** <https://youtu.be/L_v_jIwN_XA>, the same link as the Setup Wizard and Quick Start. It appears on the product page.
 - **Documentation version:** read from `CHANGELOG.md` on each build (currently 1.0.0).
 

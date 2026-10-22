@@ -18,6 +18,7 @@
   <link rel="icon" href="../../assets/favicon.svg" type="image/svg+xml">
   <link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
   <link rel="stylesheet" href="../../assets/site.css">
+  <script src="../../assets/video.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#content">Skip to content</a>
@@ -53,13 +54,20 @@
           <li><a class="button" href="https://youtu.be/L_v_jIwN_XA">Watch the tutorial</a></li>
           <li><a class="button" href="docs/index.html">Documentation</a></li>
         </ul>
-        <figure class="frame">
-          <img src="../../assets/img/card-hand-toolkit/cover-1600.jpg"
-               srcset="../../assets/img/card-hand-toolkit/cover-800.jpg 800w, ../../assets/img/card-hand-toolkit/cover-1600.jpg 1600w"
-               sizes="(min-width: 72rem) 72rem, 100vw"
-               width="1600" height="900"
-               alt="A fanned hand of five space-themed cards made with Card Hand Toolkit. The centre card, Magnetar, is raised above the others.">
-        </figure>
+        <!-- Demo video: a poster that links to YouTube. assets/video.js swaps in the player when it's clicked. -->
+        <div id="demo" class="frame video">
+          <a class="video-poster" href="https://youtu.be/r8N_8kI9sw8" data-youtube-id="r8N_8kI9sw8" data-title="Card Hand Toolkit demo video">
+            <img src="../../assets/img/card-hand-toolkit/cover-1600.jpg"
+                 srcset="../../assets/img/card-hand-toolkit/cover-800.jpg 800w, ../../assets/img/card-hand-toolkit/cover-1600.jpg 1600w"
+                 sizes="(min-width: 72rem) 72rem, 100vw"
+                 width="1600" height="900"
+                 alt="">
+            <span class="video-play">
+              <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg>
+              Watch the demo
+            </span>
+          </a>
+        </div>
       </div>
     </section>
 
@@ -175,6 +183,7 @@
           <li><a href="docs/quickstart.html">Quick Start</a><span>Install, run the Setup Wizard, and get cards drawing, showing data and playing.</span></li>
           <li><a href="docs/api.html">API Reference</a><span>Concepts, modules and every public type.</span></li>
           <li><a href="docs/faq.html">FAQ</a><span>Common questions and troubleshooting.</span></li>
+          <li><a href="https://youtu.be/r8N_8kI9sw8">Demo video</a><span>See the toolkit in action.</span></li>
           <li><a href="https://youtu.be/L_v_jIwN_XA">Tutorial video</a><span>Recreate the included sample game from a fresh Unity project.</span></li>
           <li><a href="https://discord.gg/rC7wVukEpu">Discord</a><span>Questions, feedback and support.</span></li>
           <li><a href="docs/changelog.html">Changelog</a><span>What's in each version.</span></li>
