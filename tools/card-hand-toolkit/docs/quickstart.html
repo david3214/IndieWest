@@ -217,6 +217,7 @@
 <p>These tweaks affect <strong>every</strong> card instance since all cards use this single prefab. Hover timing (hover timeout, long-press delay, hover scale) lives in <strong>HoverProfile</strong>, not on the prefab.</p>
 <p>The shape of the hand&#39;s fan (spread, arc, card rotation) lives in a <strong><a href="api.html#fanlayoutprofile-c">Fan Layout Profile</a></strong>. The Player Hand uses the shipped <code>CHT_FanLayoutProfile</code>. To change it, create your own from <strong>Create ▸ Card Toolkit ▸ Config ▸ Fan Layout Profile</strong> and assign it to the <strong>Fan Layout</strong> field on the <strong>Player Hand</strong> in your Game scene.</p>
 </blockquote>
+<p>With <strong>Gizmos</strong> enabled in the Scene view, select your Fan Layout Profile asset to see previews for every player hand, opponent hand, deck pile and discard pile using it in the scene. Edit the profile&#39;s curves and values to see the previews update immediately, including Undo/Redo. Each hand&#39;s <strong>Seat Modifier</strong> or pile&#39;s <strong>Spread Modifier</strong> is included in its preview; piles also respect <strong>Max Visible Layers</strong>. You can also select an individual hand or pile, or one of its parent objects, to show its preview.</p>
 <p>Then try it out:</p>
 <ol>
 <li>Drop an instance of <code>CardPlayable_User</code> under the <strong>Player Hand</strong> in your Game scene and press <strong>Play</strong>.</li>
@@ -271,7 +272,7 @@
 <li>Drag the Deck List you created in step 2 into the component&#39;s <strong>Deck List</strong> field.</li>
 <li>(Optional) Drag <code>Runtime/Prefabs/CHT_DeckVisual</code> into your Game scene and place it beside the hand. Then drag the <strong>CHT_DeckVisual</strong> object from the <strong>Hierarchy</strong> (not the prefab from the Project window) into the component&#39;s <strong>Visual Deck</strong> field. The deck then shows as a pile, and drawn cards fly from it into the hand.</li>
 </ol>
-<p>On the scene&#39;s <strong><a href="api.html#visualdeck--visualdiscard-c">Visual Deck</a></strong> component, <strong>Max Visible Layers</strong> defaults to <code>8</code>. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. <code>VisualDiscard</code> uses the same setting. Select either pile to preview its visible layers in the gizmo.</p>
+<p>On the scene&#39;s <strong><a href="api.html#visualdeck--visualdiscard-c">Visual Deck</a></strong> component, <strong>Max Visible Layers</strong> defaults to <code>8</code>. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. <code>VisualDiscard</code> uses the same setting. Select either pile or its assigned Fan Layout Profile asset to preview its visible layers in the gizmo.</p>
 <p>Here&#39;s what it does:</p>
 <pre tabindex="0"><code class="language-csharp"><span class="hljs-keyword">using</span> System.Collections;
 <span class="hljs-keyword">using</span> UnityEngine;
@@ -776,7 +777,6 @@
 <ul>
 <li><strong><a href="../index.html">Toolkit website</a></strong> — the official Card Hand Toolkit product page.</li>
 <li><strong>Discord</strong> — <a href="https://discord.gg/rC7wVukEpu">link</a> join the discussion, <strong>Report an Issue</strong>, or <strong>Contact Support</strong>.</li>
-<li><strong>Ask the CHT Assistant (GPT)</strong> — Access via link <a href="https://chatgpt.com/g/g-68f00e7f8b248191a7dd41a0089b15d7-card-hand-toolkit-assistant-cht-assistant">here</a></li>
 <li><strong><a href="https://youtu.be/L_v_jIwN_XA">Watch the Quick Start Tutorial</a></strong> — Recreate the included sample game from a fresh Unity project.</li>
 </ul>
 <hr>

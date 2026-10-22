@@ -409,7 +409,7 @@ A **`FanLayoutProfile`** asset shapes the fan. The Player Hand, the opponent han
 | **Rot Curve** × **Rot Degrees Scale** | How much each card tilts. |
 | **Max Hand Spread** | The hand stops widening past this many cards; more cards squeeze closer together. |
 
-Each hand or pile also has a `FanSeatModifiers` (**Seat Modifier** on hands, **Spread Modifier** on piles), whose **Spread Mul** scales the spread, arc and tilt: below `1` is tighter, and the piles use a small negative value to stack cards almost on top of each other. Select a hand or pile to preview its fan as a gizmo.
+Each hand or pile also has a `FanSeatModifiers` (**Seat Modifier** on hands, **Spread Modifier** on piles), whose **Spread Mul** scales the spread, arc and tilt: below `1` is tighter, and the piles use a small negative value to stack cards almost on top of each other. Select a hand or pile, or one of its parent objects, to preview its fan as a gizmo. Selecting a Fan Layout Profile asset also shows the previews for all player hands, opponent hands, deck piles and discard piles using it in the scene, with each hand or pile's own modifier and each pile's **Max Visible Layers** setting. Enable **Gizmos** in the Scene view; the previews update as you edit the profile, including Undo/Redo.
 
 Piles calculate their spread from at most **Max Visible Layers** cards, so large decks keep distinct offsets between the visible layers. This limit applies only to `VisualDeck` and `VisualDiscard`; hand layouts still use every card.
 

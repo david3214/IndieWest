@@ -1,8 +1,8 @@
 {
   "source": "../../My games/Card Game Template/Assets/CardHandToolkit/Documentation",
-  "importedAt": "2026-10-21T16:30:20.888Z",
+  "importedAt": "2026-10-22T01:07:27.323Z",
   "files": {
-    "API.md": "dd75c7bbf830ca3fb2e7d333ffa8cc5abe408c7bb5a85317316f48bff938f418",
+    "API.md": "375fb766c97de7d8b0a70ff776f6c36d69547eec36f27277139962ff045a5c20",
     "CHANGELOG.md": "0df2f6f93be90875f7f9178efd59a847b5ae08efd189b0efd2c29ba2233ecac4",
     "FAQ.md": "ab5485878e6d7d96e568c6c851f0edafa02b91d81fb18513c14e89806cd1d672",
     "Images/CardDataFlow.png": "c184b54566ee0cc313bded98748078fb324f45b3ecd1e2e117d3bc2d91a61894",
@@ -25,7 +25,7 @@
     "Images/UnityCardAnchoring.png": "987112d3a33b5550786451a2cb5a92b5286651f10b3e572326814a25263eb87f",
     "Images/WorldViewAnchoring_Template.png": "c8f1f8c956914d319ae68cb27763ad108c1452085589baf8a4fc36a100f13607",
     "LICENSE.md": "ef517936129f57b1be8409363127fbe67610ef53e70f750442dbce24cdd2fe95",
-    "QuickStart.md": "1fa109560895ee1c32d5f20073722d2c48fe56780a6c75071dec0e25f2cd8b07",
+    "QuickStart.md": "a0b4f1020dad1ec9ea56e297efe1fecf22e3aef71433407987c71d9e7d0ca519",
     "README.md": "955cb589609524d6b27b41d78458c2ddcf71dd84c20d283bf256722fc0050e02"
   }
 }

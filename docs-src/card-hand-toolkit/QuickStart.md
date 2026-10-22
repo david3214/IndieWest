@@ -131,6 +131,8 @@ Open **`CardPlayable_User.prefab`** to tune your game’s “feel”:
 >
 > The shape of the hand's fan (spread, arc, card rotation) lives in a **[Fan Layout Profile](API.md#fanlayoutprofile-c)**. The Player Hand uses the shipped `CHT_FanLayoutProfile`. To change it, create your own from **Create ▸ Card Toolkit ▸ Config ▸ Fan Layout Profile** and assign it to the **Fan Layout** field on the **Player Hand** in your Game scene.
 
+With **Gizmos** enabled in the Scene view, select your Fan Layout Profile asset to see previews for every player hand, opponent hand, deck pile and discard pile using it in the scene. Edit the profile's curves and values to see the previews update immediately, including Undo/Redo. Each hand's **Seat Modifier** or pile's **Spread Modifier** is included in its preview; piles also respect **Max Visible Layers**. You can also select an individual hand or pile, or one of its parent objects, to show its preview.
+
 Then try it out:
 
 1. Drop an instance of `CardPlayable_User` under the **Player Hand** in your Game scene and press **Play**.
@@ -193,7 +195,7 @@ The toolkit includes a helper script for this, `Samples/Scripts/Sample_DrawOnSta
 3. Drag the Deck List you created in step 2 into the component's **Deck List** field.
 4. (Optional) Drag `Runtime/Prefabs/CHT_DeckVisual` into your Game scene and place it beside the hand. Then drag the **CHT_DeckVisual** object from the **Hierarchy** (not the prefab from the Project window) into the component's **Visual Deck** field. The deck then shows as a pile, and drawn cards fly from it into the hand.
 
-On the scene's **[Visual Deck](API.md#visualdeck--visualdiscard-c)** component, **Max Visible Layers** defaults to `8`. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. `VisualDiscard` uses the same setting. Select either pile to preview its visible layers in the gizmo.
+On the scene's **[Visual Deck](API.md#visualdeck--visualdiscard-c)** component, **Max Visible Layers** defaults to `8`. It spreads the top eight cards normally and stacks any remaining cards behind the bottom visible layer, retaining every card object. `VisualDiscard` uses the same setting. Select either pile or its assigned Fan Layout Profile asset to preview its visible layers in the gizmo.
 
 Here's what it does:
 
@@ -680,7 +682,6 @@ If you have questions, feedback, or want to show what you’ve built:
 
 - **[Toolkit website](https://david3214.github.io/IndieWest/tools/card-hand-toolkit/)** — the official Card Hand Toolkit product page.
 - **Discord** — [link](https://discord.gg/rC7wVukEpu) join the discussion, **Report an Issue**, or **Contact Support**.
-- **Ask the CHT Assistant (GPT)** — Access via link [here](https://chatgpt.com/g/g-68f00e7f8b248191a7dd41a0089b15d7-card-hand-toolkit-assistant-cht-assistant)
 - **[Watch the Quick Start Tutorial](https://youtu.be/L_v_jIwN_XA)** — Recreate the included sample game from a fresh Unity project.
 
 ---
