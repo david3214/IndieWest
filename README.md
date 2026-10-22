@@ -1,6 +1,6 @@
 # IndieWest website
 
-The IndieWest publisher site: a home page, a page per product, and each product's documentation. It's plain HTML and CSS, hosted on GitHub Pages. The only JavaScript is `assets/video.js`, which plays the product page's demo video in place, and everything works without it. The only build step renders product documentation from Markdown; it needs Node.js 18 or newer and nothing else.
+The IndieWest publisher site: a home page, a page per product, and each product's documentation. It's plain HTML and CSS, hosted on GitHub Pages. The only JavaScript is `assets/video.js`, which plays the product page's demo video in place, and the GoatCounter visitor counter (see "Visitor stats" below). Everything works without either. The only build step renders product documentation from Markdown; it needs Node.js 18 or newer and nothing else.
 
 Site address once published: <https://david3214.github.io/IndieWest/>
 
@@ -94,6 +94,18 @@ Page titles and the order of the docs navigation are set in `scripts/docs.config
 A video on a page starts as a poster image that links to YouTube. Clicking it swaps in YouTube's player (the no-cookie version) and starts playing, so the page makes no requests to YouTube until a visitor presses play. Without JavaScript, or when a page is opened straight from disk, the poster just opens the video on YouTube.
 
 To add one, copy the `<div id="demo" class="frame video">` block from `tools/card-hand-toolkit/index.html`, set the video ID in both the link and `data-youtube-id`, and include `assets/video.js` in the page's `<head>`.
+
+## Visitor stats
+
+Every page counts visits with [GoatCounter](https://www.goatcounter.com/). See the numbers at <https://david3214.goatcounter.com/>. It sets no cookies and stores no personal data, so the site needs no consent banner. The script is small and loads `async`, so it never holds up the page, and if it's blocked the page works the same.
+
+The tag is in the `<head>` of `index.html`, `tools/card-hand-toolkit/index.html` and `scripts/docs-template.html` (so every docs page gets it on build). Copy it into the `<head>` of any new hand-written page:
+
+```html
+<script data-goatcounter="https://david3214.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+```
+
+Pages opened straight from disk or from `localhost` aren't counted. Visitors with ad blockers aren't counted either, so treat the numbers as a lower bound.
 
 ## Editing checklist
 
